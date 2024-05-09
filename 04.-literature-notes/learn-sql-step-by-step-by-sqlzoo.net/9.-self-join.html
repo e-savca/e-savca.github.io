@@ -1,0 +1,542 @@
+<!DOCTYPE html> <html><head>
+		<title>9. Self join</title>
+		<base href="../../">
+		<meta id="root-path" root-path="../../">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0">
+		<meta charset="UTF-8">
+		<meta name="description" content="EUGENIU2 - 9. Self join">
+		<meta property="og:title" content="9. Self join">
+		<meta property="og:description" content="EUGENIU2 - 9. Self join">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html">
+		<meta property="og:image" content="undefined">
+		<meta property="og:site_name" content="EUGENIU2">
+		<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="lib/rss.xml"><script async="" id="webpage-script" src="lib/scripts/webpage.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script type="module" async="" id="graph-view-script" src="lib/scripts/graph-view.js"></script><script async="" id="graph-wasm-script" src="lib/scripts/graph-wasm.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-render-worker-script" src="lib/scripts/graph-render-worker.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="tinycolor-script" src="lib/scripts/tinycolor.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="pixi-script" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.4.0/pixi.min.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="minisearch-script" src="https://cdn.jsdelivr.net/npm/minisearch@6.3.0/dist/umd/index.min.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><link rel="icon" href="lib/media/favicon.png"><script async="" id="graph-data-script" src="lib/scripts/graph-data.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><style>body{--line-width:40em;--line-width-adaptive:40em;--file-line-width:40em;--sidebar-width:min(20em, 80vw);--collapse-arrow-size:11px;--tree-horizontal-spacing:0.6em;--tree-vertical-spacing:0.6em;--sidebar-margin:12px}.sidebar{height:100%;min-width:calc(var(--sidebar-width) + var(--divider-width-hover));max-width:calc(var(--sidebar-width) + var(--divider-width-hover));font-size:14px;z-index:10;position:relative;overflow:hidden;transition:min-width ease-in-out,max-width ease-in-out;transition-duration:.2s;contain:size}.sidebar-left{left:0}.sidebar-right{right:0}.sidebar.is-collapsed{min-width:0;max-width:0}body.floating-sidebars .sidebar{position:absolute}.sidebar-content{height:100%;min-width:calc(var(--sidebar-width) - var(--divider-width-hover));top:0;padding:var(--sidebar-margin);padding-top:4em;line-height:var(--line-height-tight);background-color:var(--background-secondary);transition:background-color,border-right,border-left,box-shadow;transition-duration:var(--color-fade-speed);transition-timing-function:ease-in-out;position:absolute;display:flex;flex-direction:column}.sidebar:not(.is-collapsed) .sidebar-content{min-width:calc(max(100%,var(--sidebar-width)) - 3px);max-width:calc(max(100%,var(--sidebar-width)) - 3px)}.sidebar-left .sidebar-content{left:0;border-top-right-radius:var(--radius-l);border-bottom-right-radius:var(--radius-l)}.sidebar-right .sidebar-content{right:0;border-top-left-radius:var(--radius-l);border-bottom-left-radius:var(--radius-l)}.sidebar:has(.sidebar-content:empty):has(.topbar-content:empty){display:none}.sidebar-topbar{height:2em;width:var(--sidebar-width);top:var(--sidebar-margin);padding-inline:var(--sidebar-margin);z-index:1;position:fixed;display:flex;align-items:center;transition:width ease-in-out;transition-duration:inherit}.sidebar.is-collapsed .sidebar-topbar{width:calc(2.3em + var(--sidebar-margin) * 2)}.sidebar .sidebar-topbar.is-collapsed{width:0}.sidebar-left .sidebar-topbar{left:0}.sidebar-right .sidebar-topbar{right:0}.topbar-content{overflow:hidden;overflow:clip;width:100%;height:100%;display:flex;align-items:center;transition:inherit}.sidebar.is-collapsed .topbar-content{width:0;transition:inherit}.clickable-icon.sidebar-collapse-icon{background-color:transparent;color:var(--icon-color-focused);padding:0!important;margin:0!important;height:100%!important;width:2.3em!important;margin-inline:0.14em!important;position:absolute}.sidebar-left .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);right:var(--sidebar-margin)}.sidebar-right .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);left:var(--sidebar-margin)}.clickable-icon.sidebar-collapse-icon svg.svg-icon{width:100%;height:100%}.sidebar-section-header{margin:0 0 1em 0;text-transform:uppercase;letter-spacing:.06em;font-weight:600}body{transition:background-color var(--color-fade-speed) ease-in-out}.webpage-container{display:flex;flex-direction:row;height:100%;width:100%;align-items:stretch;justify-content:center}.document-container{opacity:1;flex-basis:100%;max-width:100%;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;transition:opacity .2s ease-in-out;contain:inline-size}.hide{opacity:0;transition:opacity .2s ease-in-out}.document-container>.markdown-preview-view{margin:var(--sidebar-margin);margin-bottom:0;width:100%;width:-webkit-fill-available;width:-moz-available;width:fill-available;background-color:var(--background-primary);transition:background-color var(--color-fade-speed) ease-in-out;border-top-right-radius:var(--window-radius,var(--radius-m));border-top-left-radius:var(--window-radius,var(--radius-m));overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;contain:inline-size}.document-container>.markdown-preview-view>.markdown-preview-sizer{padding-bottom:80vh!important;width:100%!important;max-width:var(--line-width)!important;flex-basis:var(--line-width)!important;transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}.markdown-rendered img:not([width]),.view-content img:not([width]){max-width:100%;outline:0}.document-container>.view-content.embed{display:flex;padding:1em;height:100%;width:100%;align-items:center;justify-content:center}.document-container>.view-content.embed>*{max-width:100%;max-height:100%;object-fit:contain}:has(> :is(.math,table)){overflow-x:auto!important}.document-container>.view-content{overflow-x:auto;contain:content;padding:0;margin:0;height:100%}.scroll-highlight{position:absolute;width:100%;height:100%;pointer-events:none;z-index:1000;background-color:hsla(var(--color-accent-hsl),.25);opacity:0;padding:1em;inset:50%;translate:-50% -50%;border-radius:var(--radius-s)}</style><script defer="">async function loadIncludes(){if("file:"!=location.protocol){let e=document.querySelectorAll("include");for(let t=0;t<e.length;t++){let o=e[t],l=o.getAttribute("src");try{const e=await fetch(l);if(!e.ok){console.log("Could not include file: "+l),o?.remove();continue}let t=await e.text(),n=document.createRange().createContextualFragment(t),i=Array.from(n.children);for(let e of i)e.classList.add("hide"),e.style.transition="opacity 0.5s ease-in-out",setTimeout((()=>{e.classList.remove("hide")}),10);o.before(n),o.remove(),console.log("Included file: "+l)}catch(e){o?.remove(),console.log("Could not include file: "+l,e);continue}}}else{if(document.querySelectorAll("include").length>0){var e=document.createElement("div");e.id="error",e.textContent="Web server exports must be hosted on an http / web server to be viewed correctly.",e.style.position="fixed",e.style.top="50%",e.style.left="50%",e.style.transform="translate(-50%, -50%)",e.style.fontSize="1.5em",e.style.fontWeight="bold",e.style.textAlign="center",document.body.appendChild(e),document.querySelector(".document-container")?.classList.remove("hide")}}}document.addEventListener("DOMContentLoaded",(()=>{loadIncludes()}));let isFileProtocol="file:"==location.protocol;function waitLoadScripts(e,t){let o=e.map((e=>document.getElementById(e+"-script"))),l=0;!function e(){let n=o[l];l++,n&&"true"!=n.getAttribute("loaded")||l<o.length&&e(),l<o.length?n.addEventListener("load",e):t()}()}</script><link rel="stylesheet" href="lib/styles/obsidian.css"><link rel="preload" href="lib/styles/other-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/other-plugins.css"></noscript><link rel="stylesheet" href="lib/styles/theme.css"><link rel="preload" href="lib/styles/global-variable-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/global-variable-styles.css"></noscript><link rel="preload" href="lib/styles/supported-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/supported-plugins.css"></noscript><link rel="preload" href="lib/styles/main-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/main-styles.css"></noscript></head><body class="publish css-settings-manager native-scrollbars theme-light show-inline-title"><script defer="">let theme=localStorage.getItem("theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");"dark"==theme?(document.body.classList.add("theme-dark"),document.body.classList.remove("theme-light")):(document.body.classList.add("theme-light"),document.body.classList.remove("theme-dark")),window.innerWidth<480?document.body.classList.add("is-phone"):window.innerWidth<768?document.body.classList.add("is-tablet"):window.innerWidth<1024?document.body.classList.add("is-small-screen"):document.body.classList.add("is-large-screen")</script><div class="webpage-container workspace"><div class="sidebar-left sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><label class="theme-toggle-container" for="theme_toggle"><input class="theme-toggle-input" type="checkbox" id="theme_toggle"><div class="toggle-background"></div></label></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content"><div class="search-input-container"><input enterkeyhint="search" type="search" spellcheck="false" placeholder="Search..."><div class="search-input-clear-button" aria-label="Clear search"></div></div><include src="lib/html/file-tree.html"></include></div><script defer="">let ls = document.querySelector(".sidebar-left"); ls.classList.add("is-collapsed"); if (window.innerWidth > 768) ls.classList.remove("is-collapsed"); ls.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-left-width"));</script></div><div class="document-container markdown-reading-view hide"><div class="markdown-preview-view markdown-rendered allow-fold-headings allow-fold-lists is-readable-line-width"><style id="MJX-CHTML-styles"></style><pre class="frontmatter language-yaml" tabindex="0" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">Parent</span><span class="token punctuation">:</span> <span class="token string">"[[Learn SQL step by step by sqlzoo.net]]"</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> IT/SQL
+  <span class="token punctuation">-</span> IT/Sources/SqlZoo<span class="token punctuation">-</span>net</code><button class="copy-code-button">Copy</button></pre><div class="markdown-preview-sizer markdown-preview-section"><h1 class="page-title heading inline-title" id="9. Self join"><ol start="9">
+<li>Self join</li>
+</ol></h1><div class="heading-wrapper"><h2 data-heading="Details of the database" class="heading" id="Details_of_the_database"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Details of the database</h2><div class="heading-children"><div class="heading-wrapper"><h3 data-heading="Edinburgh Buses" class="heading" id="Edinburgh_Buses"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Edinburgh Buses</h3><div class="heading-children"><div><p>This database consists of two tables: stops and routes</p></div></div></div><div class="heading-wrapper"><h3 data-heading="stops" class="heading" id="stops"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>stops</h3><div class="heading-children"><div><p>This is a list of areas served by buses. The detail does not really include each actual bus stop - just areas within Edinburgh and whole towns near Edinburgh.</p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Field</td>
+<td>Type</td>
+<td>Notes</td>
+</tr>
+<tr>
+<td>id</td>
+<td>INTEGER</td>
+<td>Arbitrary value</td>
+</tr>
+<tr>
+<td>name</td>
+<td>CHAR(30)</td>
+<td>The name of an area served by at least one bus</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="route" class="heading" id="route"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>route</h3><div class="heading-children"><div><p>A route is the path through town taken by a bus.</p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Field</td>
+<td>Type</td>
+<td>Notes</td>
+</tr>
+<tr>
+<td>num</td>
+<td>CHAR(5)</td>
+<td>The number of the bus - as it appears on the front of the vehicle. Oddly these numbers often include letters</td>
+</tr>
+<tr>
+<td>company</td>
+<td>CHAR(3)</td>
+<td>Several bus companies operate in Edinburgh. The main one is Lothian Region Transport - LRT</td>
+</tr>
+<tr>
+<td>pos</td>
+<td>INTEGER</td>
+<td>This indicates the order of the stop within the route. Some routes may revisit a stop. Most buses go in both directions.</td>
+</tr>
+<tr>
+<td>stop</td>
+<td>INTEGER</td>
+<td>This references the stops table</td>
+</tr>
+</tbody>
+</table></div><div><p>As different companies use numbers arbitrarily the num and the company are both required to identify a route.</p></div></div></div></div></div><div class="heading-wrapper"><h2 data-heading="Routes and stops" class="heading" id="Routes_and_stops"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Routes and stops</h2><div class="heading-children"><div class="heading-wrapper"><h3 data-heading="4." class="heading" id="4."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>4.</h3><div class="heading-children"><div><p>The query shown gives the number of routes that visit either London Road (149) or Craiglockhart (53). Run the query and notice the two services that link these&nbsp;<strong>stops</strong>&nbsp;have a count of 2. Add a HAVING clause to restrict the output to these two routes.</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> company<span class="token punctuation">,</span> num<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span>
+<span class="token keyword">FROM</span> route <span class="token keyword">WHERE</span> stop<span class="token operator">=</span><span class="token number">149</span> <span class="token operator">OR</span> stop<span class="token operator">=</span><span class="token number">53</span>
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> company<span class="token punctuation">,</span> num
+<span class="token keyword">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&gt;=</span><span class="token number">2</span>
+
+</code><button class="copy-code-button">Copy</button></pre></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>company</td>
+<td>num</td>
+<td>COUNT()</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>45</td>
+<td>2</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="5." class="heading" id="5."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>5.</h3><div class="heading-children"><div><p>Execute the self join shown and observe that b.stop gives all the places you can get to from Craiglockhart, without changing routes. Change the query so that it shows the services from Craiglockhart to London Road.</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> a<span class="token punctuation">.</span>company<span class="token punctuation">,</span> a<span class="token punctuation">.</span>num<span class="token punctuation">,</span> a<span class="token punctuation">.</span>stop<span class="token punctuation">,</span> b<span class="token punctuation">.</span>stop
+<span class="token keyword">FROM</span> route a <span class="token keyword">JOIN</span> route b <span class="token keyword">ON</span>
+  <span class="token punctuation">(</span>a<span class="token punctuation">.</span>company<span class="token operator">=</span>b<span class="token punctuation">.</span>company <span class="token operator">AND</span> a<span class="token punctuation">.</span>num<span class="token operator">=</span>b<span class="token punctuation">.</span>num<span class="token punctuation">)</span>
+<span class="token keyword">WHERE</span> a<span class="token punctuation">.</span>stop<span class="token operator">=</span><span class="token number">53</span> <span class="token operator">and</span> b<span class="token punctuation">.</span>stop <span class="token operator">=</span> <span class="token number">149</span>
+</code><button class="copy-code-button">Copy</button></pre></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>company</td>
+<td>num</td>
+<td>stop</td>
+<td>stop</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>4</td>
+<td>53</td>
+<td>149</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>45</td>
+<td>53</td>
+<td>149</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="6." class="heading" id="6."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>6.</h3><div class="heading-children"><div><p>The query shown is similar to the previous one, however by joining two copies of the&nbsp;<strong>stops</strong>&nbsp;table we can refer to&nbsp;<strong>stops</strong>&nbsp;by&nbsp;<strong>name</strong>&nbsp;rather than by number. Change the query so that the services between 'Craiglockhart' and 'London Road' are shown. If you are tired of these places try 'Fairmilehead' against 'Tollcross'</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> a<span class="token punctuation">.</span>company<span class="token punctuation">,</span> a<span class="token punctuation">.</span>num<span class="token punctuation">,</span> stopa<span class="token punctuation">.</span>name<span class="token punctuation">,</span> stopb<span class="token punctuation">.</span>name
+<span class="token keyword">FROM</span> route a <span class="token keyword">JOIN</span> route b <span class="token keyword">ON</span>
+  <span class="token punctuation">(</span>a<span class="token punctuation">.</span>company<span class="token operator">=</span>b<span class="token punctuation">.</span>company <span class="token operator">AND</span> a<span class="token punctuation">.</span>num<span class="token operator">=</span>b<span class="token punctuation">.</span>num<span class="token punctuation">)</span>
+  <span class="token keyword">JOIN</span> stops stopa <span class="token keyword">ON</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>stop<span class="token operator">=</span>stopa<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+  <span class="token keyword">JOIN</span> stops stopb <span class="token keyword">ON</span> <span class="token punctuation">(</span>b<span class="token punctuation">.</span>stop<span class="token operator">=</span>stopb<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+<span class="token keyword">WHERE</span> stopa<span class="token punctuation">.</span>name<span class="token operator">=</span><span class="token string">'Craiglockhart'</span> <span class="token operator">and</span> stopb<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'London Road'</span>
+</code><button class="copy-code-button">Copy</button></pre></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>company</td>
+<td>num</td>
+<td>name</td>
+<td>name</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>4</td>
+<td>Craiglockhart</td>
+<td>London Road</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>45</td>
+<td>Craiglockhart</td>
+<td>London Road</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div><div class="heading-wrapper"><h2 data-heading="Using a [self join](https://sqlzoo.net/wiki/Using_a_self_join)" class="heading" id="Using_a_[self_join](https://sqlzoo.net/wiki/Using_a_self_join)"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Using a <a data-tooltip-position="top" aria-label="https://sqlzoo.net/wiki/Using_a_self_join" rel="noopener" class="external-link" href="https://sqlzoo.net/wiki/Using_a_self_join" target="_blank">self join</a></h2><div class="heading-children"><div class="heading-wrapper"><h3 data-heading="7." class="heading" id="7."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>7.</h3><div class="heading-children"><div><p>Give a list of all the services which connect stops 115 and 137 ('Haymarket' and 'Leith')</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span> a<span class="token punctuation">.</span>company<span class="token punctuation">,</span> a<span class="token punctuation">.</span>num
+	<span class="token keyword">FROM</span> route a <span class="token keyword">JOIN</span> route b <span class="token keyword">ON</span>
+    	<span class="token punctuation">(</span>a<span class="token punctuation">.</span>company <span class="token operator">=</span> b<span class="token punctuation">.</span>company <span class="token operator">AND</span> a<span class="token punctuation">.</span>num <span class="token operator">=</span> b<span class="token punctuation">.</span>num<span class="token punctuation">)</span>
+        <span class="token keyword">JOIN</span> stops sa <span class="token keyword">on</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>stop <span class="token operator">=</span> sa<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+        <span class="token keyword">JOIN</span> stops sb <span class="token keyword">on</span> <span class="token punctuation">(</span>b<span class="token punctuation">.</span>stop <span class="token operator">=</span> sb<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+        <span class="token keyword">WHERE</span> sa<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Haymarket'</span> <span class="token operator">and</span> sb<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Leith'</span>
+</code><button class="copy-code-button">Copy</button></pre></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>company</td>
+<td>num</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>12</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>2</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>22</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>25</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>2A</td>
+</tr>
+<tr>
+<td>SMT</td>
+<td>C5</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="8." class="heading" id="8."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>8.</h3><div class="heading-children"><div><p>Give a list of the services which connect the&nbsp;<strong>stops</strong>&nbsp;'Craiglockhart' and 'Tollcross'</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> a<span class="token punctuation">.</span>company<span class="token punctuation">,</span> a<span class="token punctuation">.</span>num
+	<span class="token keyword">FROM</span> route a <span class="token keyword">JOIN</span> route b <span class="token keyword">on</span>
+    	<span class="token punctuation">(</span>a<span class="token punctuation">.</span>num <span class="token operator">=</span> b<span class="token punctuation">.</span>num <span class="token operator">and</span> a<span class="token punctuation">.</span>company <span class="token operator">=</span> b<span class="token punctuation">.</span>company<span class="token punctuation">)</span>
+    <span class="token keyword">JOIN</span> stops aa <span class="token keyword">on</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>stop <span class="token operator">=</span> aa<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+    <span class="token keyword">JOIN</span> stops bb <span class="token keyword">on</span> <span class="token punctuation">(</span>b<span class="token punctuation">.</span>stop <span class="token operator">=</span> bb<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+    <span class="token keyword">WHERE</span> aa<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Craiglockhart'</span> <span class="token operator">and</span> bb<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Tollcross'</span>
+</code><button class="copy-code-button">Copy</button></pre></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>company</td>
+<td>num</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>10</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>27</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>45</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>47</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="9." class="heading" id="9."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>9.</h3><div class="heading-children"><div><p>Give a distinct list of the&nbsp;<strong>stops</strong>&nbsp;which may be reached from 'Craiglockhart' by taking one bus, including 'Craiglockhart' itself, offered by the LRT company. Include the company and bus no. of the relevant services.</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded">
+<span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span> bb<span class="token punctuation">.</span>name<span class="token punctuation">,</span> a<span class="token punctuation">.</span>company<span class="token punctuation">,</span> a<span class="token punctuation">.</span>num
+	<span class="token keyword">FROM</span> route a <span class="token keyword">JOIN</span> route b <span class="token keyword">on</span>
+    	<span class="token punctuation">(</span>a<span class="token punctuation">.</span>num <span class="token operator">=</span> b<span class="token punctuation">.</span>num <span class="token operator">and</span> a<span class="token punctuation">.</span>company <span class="token operator">=</span> b<span class="token punctuation">.</span>company<span class="token punctuation">)</span>
+    <span class="token keyword">JOIN</span> stops aa <span class="token keyword">on</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>stop <span class="token operator">=</span> aa<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+    <span class="token keyword">JOIN</span> stops bb <span class="token keyword">on</span> <span class="token punctuation">(</span>b<span class="token punctuation">.</span>stop <span class="token operator">=</span> bb<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+    <span class="token keyword">WHERE</span> aa<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Craiglockhart'</span>
+
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h3 data-heading="Correct answer" class="heading" id="Correct_answer"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Correct answer</h3><div class="heading-children"><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>company</td>
+<td>num</td>
+</tr>
+<tr>
+<td>Silverknowes</td>
+<td>LRT</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Muirhouse</td>
+<td>LRT</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Newhaven</td>
+<td>LRT</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Leith</td>
+<td>LRT</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Leith Walk</td>
+<td>LRT</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Princes Street</td>
+<td>LRT</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Tollcross</td>
+<td>LRT</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Craiglockhart</td>
+<td>LRT</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Colinton</td>
+<td>LRT</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Torphin</td>
+<td>LRT</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Silverknowes</td>
+<td>LRT</td>
+<td>27</td>
+</tr>
+<tr>
+<td>Crewe Toll</td>
+<td>LRT</td>
+<td>27</td>
+</tr>
+<tr>
+<td>Canonmills</td>
+<td>LRT</td>
+<td>27</td>
+</tr>
+<tr>
+<td>Hanover Street</td>
+<td>LRT</td>
+<td>27</td>
+</tr>
+<tr>
+<td>Tollcross</td>
+<td>LRT</td>
+<td>27</td>
+</tr>
+<tr>
+<td>Craiglockhart</td>
+<td>LRT</td>
+<td>27</td>
+</tr>
+<tr>
+<td>Oxgangs</td>
+<td>LRT</td>
+<td>27</td>
+</tr>
+<tr>
+<td>Hunters Tryst</td>
+<td>LRT</td>
+<td>27</td>
+</tr>
+<tr>
+<td>Bingham</td>
+<td>LRT</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Northfield</td>
+<td>LRT</td>
+<td>4</td>
+</tr>
+<tr>
+<td>London Road</td>
+<td>LRT</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Princes Street</td>
+<td>LRT</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Haymarket</td>
+<td>LRT</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Craiglockhart</td>
+<td>LRT</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Oxgangs</td>
+<td>LRT</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Fairmilehead</td>
+<td>LRT</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Hillend</td>
+<td>LRT</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Brunstane</td>
+<td>LRT</td>
+<td>45</td>
+</tr>
+<tr>
+<td>Duddingston</td>
+<td>LRT</td>
+<td>45</td>
+</tr>
+<tr>
+<td>Northfield</td>
+<td>LRT</td>
+<td>45</td>
+</tr>
+<tr>
+<td>London Road</td>
+<td>LRT</td>
+<td>45</td>
+</tr>
+<tr>
+<td>Hanover Street</td>
+<td>LRT</td>
+<td>45</td>
+</tr>
+<tr>
+<td>Tollcross</td>
+<td>LRT</td>
+<td>45</td>
+</tr>
+<tr>
+<td>Craiglockhart</td>
+<td>LRT</td>
+<td>45</td>
+</tr>
+<tr>
+<td>Colinton</td>
+<td>LRT</td>
+<td>45</td>
+</tr>
+<tr>
+<td>Currie</td>
+<td>LRT</td>
+<td>45</td>
+</tr>
+<tr>
+<td>Riccarton Campus</td>
+<td>LRT</td>
+<td>45</td>
+</tr>
+<tr>
+<td>Canonmills</td>
+<td>LRT</td>
+<td>47</td>
+</tr>
+<tr>
+<td>Hanover Street</td>
+<td>LRT</td>
+<td>47</td>
+</tr>
+<tr>
+<td>Tollcross</td>
+<td>LRT</td>
+<td>47</td>
+</tr>
+<tr>
+<td>Craiglockhart</td>
+<td>LRT</td>
+<td>47</td>
+</tr>
+<tr>
+<td>Colinton</td>
+<td>LRT</td>
+<td>47</td>
+</tr>
+<tr>
+<td>Currie</td>
+<td>LRT</td>
+<td>47</td>
+</tr>
+<tr>
+<td>Balerno</td>
+<td>LRT</td>
+<td>47</td>
+</tr>
+<tr>
+<td>Cockburn Crescent</td>
+<td>LRT</td>
+<td>47</td>
+</tr>
+<tr>
+<td>Balerno Church</td>
+<td>LRT</td>
+<td>47</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="10." class="heading" id="10."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>10.</h3><div class="heading-children"><div><p>Find the routes involving two buses that can go from&nbsp;<strong>Craiglockhart</strong>&nbsp;to&nbsp;<strong>Lochend</strong>.</p></div><div><p>Show the bus no. and company for the first bus, the name of the stop for the transfer,</p></div><div><p>and the bus no. and company for the second bus.</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> a<span class="token punctuation">.</span>num<span class="token punctuation">,</span> a<span class="token punctuation">.</span>company<span class="token punctuation">,</span>bb<span class="token punctuation">.</span>name<span class="token punctuation">,</span> c<span class="token punctuation">.</span>num<span class="token punctuation">,</span> c<span class="token punctuation">.</span>company
+	<span class="token keyword">FROM</span> route a
+    	<span class="token keyword">JOIN</span> route b <span class="token keyword">on</span> a<span class="token punctuation">.</span>num <span class="token operator">=</span> b<span class="token punctuation">.</span>num <span class="token operator">and</span> a<span class="token punctuation">.</span>company <span class="token operator">=</span> b<span class="token punctuation">.</span>company
+        <span class="token keyword">JOIN</span> <span class="token punctuation">(</span>route c <span class="token keyword">JOIN</span> route d <span class="token keyword">on</span> c<span class="token punctuation">.</span>company <span class="token operator">=</span> d<span class="token punctuation">.</span>company <span class="token operator">and</span> c<span class="token punctuation">.</span>num <span class="token operator">=</span> d<span class="token punctuation">.</span>num<span class="token punctuation">)</span>
+        <span class="token keyword">JOIN</span> stops aa <span class="token keyword">on</span> a<span class="token punctuation">.</span>stop <span class="token operator">=</span> aa<span class="token punctuation">.</span>id
+        <span class="token keyword">JOIN</span> stops bb <span class="token keyword">on</span> b<span class="token punctuation">.</span>stop <span class="token operator">=</span> bb<span class="token punctuation">.</span>id
+        <span class="token keyword">JOIN</span> stops cc <span class="token keyword">on</span> c<span class="token punctuation">.</span>stop <span class="token operator">=</span> cc<span class="token punctuation">.</span>id
+		<span class="token keyword">JOIN</span> stops dd <span class="token keyword">on</span> d<span class="token punctuation">.</span>stop <span class="token operator">=</span> dd<span class="token punctuation">.</span>id
+    <span class="token keyword">where</span> aa<span class="token punctuation">.</span>name <span class="token operator">=</span>  <span class="token string">'Craiglockhart'</span>
+    	<span class="token operator">AND</span> dd<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Lochend'</span>
+        <span class="token operator">AND</span> bb<span class="token punctuation">.</span>name <span class="token operator">=</span> cc<span class="token punctuation">.</span>name
+    <span class="token keyword">ORDER</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span>
+
+</code><button class="copy-code-button">Copy</button></pre></div><div class="mod-footer"></div></div></div></div></div></div></div></div><div class="sidebar-right sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content"><div class="graph-view-wrapper"><div class="sidebar-section-header">Interactive Graph</div><div class="graph-view-placeholder">
+		<div class="graph-view-container">
+			<div class="graph-icon graph-expand" role="button" aria-label="Expand" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+			<canvas id="graph-canvas" class="hide" width="512px" height="512px"></canvas>
+		</div>
+		</div></div><div class="tree-container mod-root nav-folder tree-item outline-tree" data-depth="0"><div class="tree-header"><span class="sidebar-section-header">Table Of Contents</span><button class="clickable-icon collapse-tree-button" aria-label="Collapse All"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button></div><div class="tree-scroll-area tree-item-children nav-folder-children"><div class="tree-item mod-tree-folder nav-folder mod-collapsible is-collapsed" style="display: none;"></div><div class="tree-item" data-depth="1"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#9. Self join"><div class="tree-item-contents heading-link" heading-name="
+Self join
+"><span class="tree-item-title">Self join</span></div></a><div class="tree-item-children nav-folder-children"><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#Details_of_the_database"><div class="tree-item-contents heading-link" heading-name="Details of the database"><div class="collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><span class="tree-item-title">Details of the database</span></div></a><div class="tree-item-children nav-folder-children"><div class="tree-item" data-depth="3"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#Edinburgh_Buses"><div class="tree-item-contents heading-link" heading-name="Edinburgh Buses"><span class="tree-item-title">Edinburgh Buses</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#stops"><div class="tree-item-contents heading-link" heading-name="stops"><span class="tree-item-title">stops</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#route"><div class="tree-item-contents heading-link" heading-name="route"><span class="tree-item-title">route</span></div></a><div class="tree-item-children nav-folder-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#Routes_and_stops"><div class="tree-item-contents heading-link" heading-name="Routes and stops"><div class="collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><span class="tree-item-title">Routes and stops</span></div></a><div class="tree-item-children nav-folder-children"><div class="tree-item" data-depth="3"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#4."><div class="tree-item-contents heading-link" heading-name="4."><span class="tree-item-title">4. 
+
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#5."><div class="tree-item-contents heading-link" heading-name="5."><span class="tree-item-title">5. 
+
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#6."><div class="tree-item-contents heading-link" heading-name="6."><span class="tree-item-title">6. 
+
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#Using_a_[self_join](https://sqlzoo.net/wiki/Using_a_self_join)"><div class="tree-item-contents heading-link" heading-name="Using a [self join](https://sqlzoo.net/wiki/Using_a_self_join)"><div class="collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><span class="tree-item-title">Using a <a data-tooltip-position="top" aria-label="https://sqlzoo.net/wiki/Using_a_self_join" rel="noopener" class="external-link" href="https://sqlzoo.net/wiki/Using_a_self_join" target="_blank">self join</a></span></div></a><div class="tree-item-children nav-folder-children"><div class="tree-item" data-depth="3"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#7."><div class="tree-item-contents heading-link" heading-name="7."><span class="tree-item-title">7. 
+
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#8."><div class="tree-item-contents heading-link" heading-name="8."><span class="tree-item-title">8. 
+
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#9."><div class="tree-item-contents heading-link" heading-name="9."><span class="tree-item-title">9. 
+
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#Correct_answer"><div class="tree-item-contents heading-link" heading-name="Correct answer"><span class="tree-item-title">Correct answer</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/9.-self-join.html#10."><div class="tree-item-contents heading-link" heading-name="10."><span class="tree-item-title">10. 
+
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div></div></div></div></div></div></div></div><script defer="">let rs = document.querySelector(".sidebar-right"); rs.classList.add("is-collapsed"); if (window.innerWidth > 768) rs.classList.remove("is-collapsed"); rs.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-right-width"));</script></div></div></body></html>

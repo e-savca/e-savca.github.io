@@ -1,0 +1,1737 @@
+<!DOCTYPE html> <html><head>
+		<title>Learn SQL step by step by sqlzoo.net</title>
+		<base href="../../">
+		<meta id="root-path" root-path="../../">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0">
+		<meta charset="UTF-8">
+		<meta name="description" content="EUGENIU2 - Learn SQL step by step by sqlzoo.net">
+		<meta property="og:title" content="Learn SQL step by step by sqlzoo.net">
+		<meta property="og:description" content="EUGENIU2 - Learn SQL step by step by sqlzoo.net">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html">
+		<meta property="og:image" content="lib/media/learn-sql-step-by-step-sqlzoo.net-240507-1.jpg">
+		<meta property="og:site_name" content="EUGENIU2">
+		<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="lib/rss.xml"><script async="" id="webpage-script" src="lib/scripts/webpage.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script type="module" async="" id="graph-view-script" src="lib/scripts/graph-view.js"></script><script async="" id="graph-wasm-script" src="lib/scripts/graph-wasm.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-render-worker-script" src="lib/scripts/graph-render-worker.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="tinycolor-script" src="lib/scripts/tinycolor.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="pixi-script" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.4.0/pixi.min.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="minisearch-script" src="https://cdn.jsdelivr.net/npm/minisearch@6.3.0/dist/umd/index.min.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><link rel="icon" href="lib/media/favicon.png"><script async="" id="graph-data-script" src="lib/scripts/graph-data.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><style>body{--line-width:40em;--line-width-adaptive:40em;--file-line-width:40em;--sidebar-width:min(20em, 80vw);--collapse-arrow-size:11px;--tree-horizontal-spacing:0.6em;--tree-vertical-spacing:0.6em;--sidebar-margin:12px}.sidebar{height:100%;min-width:calc(var(--sidebar-width) + var(--divider-width-hover));max-width:calc(var(--sidebar-width) + var(--divider-width-hover));font-size:14px;z-index:10;position:relative;overflow:hidden;transition:min-width ease-in-out,max-width ease-in-out;transition-duration:.2s;contain:size}.sidebar-left{left:0}.sidebar-right{right:0}.sidebar.is-collapsed{min-width:0;max-width:0}body.floating-sidebars .sidebar{position:absolute}.sidebar-content{height:100%;min-width:calc(var(--sidebar-width) - var(--divider-width-hover));top:0;padding:var(--sidebar-margin);padding-top:4em;line-height:var(--line-height-tight);background-color:var(--background-secondary);transition:background-color,border-right,border-left,box-shadow;transition-duration:var(--color-fade-speed);transition-timing-function:ease-in-out;position:absolute;display:flex;flex-direction:column}.sidebar:not(.is-collapsed) .sidebar-content{min-width:calc(max(100%,var(--sidebar-width)) - 3px);max-width:calc(max(100%,var(--sidebar-width)) - 3px)}.sidebar-left .sidebar-content{left:0;border-top-right-radius:var(--radius-l);border-bottom-right-radius:var(--radius-l)}.sidebar-right .sidebar-content{right:0;border-top-left-radius:var(--radius-l);border-bottom-left-radius:var(--radius-l)}.sidebar:has(.sidebar-content:empty):has(.topbar-content:empty){display:none}.sidebar-topbar{height:2em;width:var(--sidebar-width);top:var(--sidebar-margin);padding-inline:var(--sidebar-margin);z-index:1;position:fixed;display:flex;align-items:center;transition:width ease-in-out;transition-duration:inherit}.sidebar.is-collapsed .sidebar-topbar{width:calc(2.3em + var(--sidebar-margin) * 2)}.sidebar .sidebar-topbar.is-collapsed{width:0}.sidebar-left .sidebar-topbar{left:0}.sidebar-right .sidebar-topbar{right:0}.topbar-content{overflow:hidden;overflow:clip;width:100%;height:100%;display:flex;align-items:center;transition:inherit}.sidebar.is-collapsed .topbar-content{width:0;transition:inherit}.clickable-icon.sidebar-collapse-icon{background-color:transparent;color:var(--icon-color-focused);padding:0!important;margin:0!important;height:100%!important;width:2.3em!important;margin-inline:0.14em!important;position:absolute}.sidebar-left .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);right:var(--sidebar-margin)}.sidebar-right .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);left:var(--sidebar-margin)}.clickable-icon.sidebar-collapse-icon svg.svg-icon{width:100%;height:100%}.sidebar-section-header{margin:0 0 1em 0;text-transform:uppercase;letter-spacing:.06em;font-weight:600}body{transition:background-color var(--color-fade-speed) ease-in-out}.webpage-container{display:flex;flex-direction:row;height:100%;width:100%;align-items:stretch;justify-content:center}.document-container{opacity:1;flex-basis:100%;max-width:100%;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;transition:opacity .2s ease-in-out;contain:inline-size}.hide{opacity:0;transition:opacity .2s ease-in-out}.document-container>.markdown-preview-view{margin:var(--sidebar-margin);margin-bottom:0;width:100%;width:-webkit-fill-available;width:-moz-available;width:fill-available;background-color:var(--background-primary);transition:background-color var(--color-fade-speed) ease-in-out;border-top-right-radius:var(--window-radius,var(--radius-m));border-top-left-radius:var(--window-radius,var(--radius-m));overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;contain:inline-size}.document-container>.markdown-preview-view>.markdown-preview-sizer{padding-bottom:80vh!important;width:100%!important;max-width:var(--line-width)!important;flex-basis:var(--line-width)!important;transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}.markdown-rendered img:not([width]),.view-content img:not([width]){max-width:100%;outline:0}.document-container>.view-content.embed{display:flex;padding:1em;height:100%;width:100%;align-items:center;justify-content:center}.document-container>.view-content.embed>*{max-width:100%;max-height:100%;object-fit:contain}:has(> :is(.math,table)){overflow-x:auto!important}.document-container>.view-content{overflow-x:auto;contain:content;padding:0;margin:0;height:100%}.scroll-highlight{position:absolute;width:100%;height:100%;pointer-events:none;z-index:1000;background-color:hsla(var(--color-accent-hsl),.25);opacity:0;padding:1em;inset:50%;translate:-50% -50%;border-radius:var(--radius-s)}</style><script defer="">async function loadIncludes(){if("file:"!=location.protocol){let e=document.querySelectorAll("include");for(let t=0;t<e.length;t++){let o=e[t],l=o.getAttribute("src");try{const e=await fetch(l);if(!e.ok){console.log("Could not include file: "+l),o?.remove();continue}let t=await e.text(),n=document.createRange().createContextualFragment(t),i=Array.from(n.children);for(let e of i)e.classList.add("hide"),e.style.transition="opacity 0.5s ease-in-out",setTimeout((()=>{e.classList.remove("hide")}),10);o.before(n),o.remove(),console.log("Included file: "+l)}catch(e){o?.remove(),console.log("Could not include file: "+l,e);continue}}}else{if(document.querySelectorAll("include").length>0){var e=document.createElement("div");e.id="error",e.textContent="Web server exports must be hosted on an http / web server to be viewed correctly.",e.style.position="fixed",e.style.top="50%",e.style.left="50%",e.style.transform="translate(-50%, -50%)",e.style.fontSize="1.5em",e.style.fontWeight="bold",e.style.textAlign="center",document.body.appendChild(e),document.querySelector(".document-container")?.classList.remove("hide")}}}document.addEventListener("DOMContentLoaded",(()=>{loadIncludes()}));let isFileProtocol="file:"==location.protocol;function waitLoadScripts(e,t){let o=e.map((e=>document.getElementById(e+"-script"))),l=0;!function e(){let n=o[l];l++,n&&"true"!=n.getAttribute("loaded")||l<o.length&&e(),l<o.length?n.addEventListener("load",e):t()}()}</script><link rel="stylesheet" href="lib/styles/obsidian.css"><link rel="preload" href="lib/styles/other-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/other-plugins.css"></noscript><link rel="stylesheet" href="lib/styles/theme.css"><link rel="preload" href="lib/styles/global-variable-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/global-variable-styles.css"></noscript><link rel="preload" href="lib/styles/supported-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/supported-plugins.css"></noscript><link rel="preload" href="lib/styles/main-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/main-styles.css"></noscript></head><body class="publish css-settings-manager native-scrollbars theme-light show-inline-title"><script defer="">let theme=localStorage.getItem("theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");"dark"==theme?(document.body.classList.add("theme-dark"),document.body.classList.remove("theme-light")):(document.body.classList.add("theme-light"),document.body.classList.remove("theme-dark")),window.innerWidth<480?document.body.classList.add("is-phone"):window.innerWidth<768?document.body.classList.add("is-tablet"):window.innerWidth<1024?document.body.classList.add("is-small-screen"):document.body.classList.add("is-large-screen")</script><div class="webpage-container workspace"><div class="sidebar-left sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><label class="theme-toggle-container" for="theme_toggle"><input class="theme-toggle-input" type="checkbox" id="theme_toggle"><div class="toggle-background"></div></label></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content"><div class="search-input-container"><input enterkeyhint="search" type="search" spellcheck="false" placeholder="Search..."><div class="search-input-clear-button" aria-label="Clear search"></div></div><include src="lib/html/file-tree.html"></include></div><script defer="">let ls = document.querySelector(".sidebar-left"); ls.classList.add("is-collapsed"); if (window.innerWidth > 768) ls.classList.remove("is-collapsed"); ls.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-left-width"));</script></div><div class="document-container markdown-reading-view hide"><div class="markdown-preview-view markdown-rendered allow-fold-headings allow-fold-lists is-readable-line-width"><style id="MJX-CHTML-styles"></style><pre class="frontmatter language-yaml" tabindex="0" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> IT/SQL
+  <span class="token punctuation">-</span> Literature<span class="token punctuation">-</span>Note
+  <span class="token punctuation">-</span> IT/Sources/SqlZoo<span class="token punctuation">-</span>net</code><button class="copy-code-button">Copy</button></pre><div class="markdown-preview-sizer markdown-preview-section"><h1 class="page-title heading inline-title" id="6. The JOIN operation"><ol start="6">
+<li>The JOIN operation</li>
+</ol></h1><div class="heading-wrapper"><div class="heading-children"><div><span style="display: block; margin-block-start: var(--p-spacing); margin-block-end: var(--p-spacing);"><span alt="6. The JOIN operation" src="6. The JOIN operation" class="internal-embed markdown-embed inline-embed is-loaded"><div class="embed-title markdown-embed-title">6. The JOIN operation</div><div class="markdown-embed-content node-insert-event"><div class="markdown-preview-view markdown-rendered node-insert-event show-indentation-guide allow-fold-headings allow-fold-lists"><div class="markdown-preview-sizer markdown-preview-section" style="padding-bottom: 0px; min-height: 5825px;"><div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div><div class="mod-header"></div><div><pre class="frontmatter language-yaml" tabindex="0" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">Parent</span><span class="token punctuation">:</span> <span class="token string">"[[Learn SQL step by step by sqlzoo.net]]"</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> IT/SQL
+  <span class="token punctuation">-</span> IT/Sources/SqlZoo<span class="token punctuation">-</span>net</code><button class="copy-code-button">Copy</button></pre></div><div class="heading-wrapper"><h2 data-heading="JOIN and UEFA EURO 2012" class="heading" id="JOIN_and_UEFA_EURO_2012"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>JOIN and UEFA EURO 2012</h2><div class="heading-children"><div><p>This tutorial introduces&nbsp;<code>JOIN</code>&nbsp;which allows you to use data from two or more tables. The tables contain all matches and goals from UEFA EURO 2012 Football Championship in Poland and Ukraine.</p></div></div></div><div class="heading-wrapper"><h2 data-heading="UEFA Database details" class="heading" id="UEFA_Database_details"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>UEFA Database details</h2><div class="heading-children"><div><p><a data-tooltip-position="top" aria-label="https://sqlzoo.net/w/images/c/ce/FootballERD.png" rel="noopener" class="external-link" href="https://sqlzoo.net/w/images/c/ce/FootballERD.png" target="_blank"><span alt="Learn SQL step by step - sqlzoo.net-240507-1.jpg" src="Learn SQL step by step - sqlzoo.net-240507-1.jpg" class="internal-embed media-embed image-embed is-loaded"><img alt="Learn SQL step by step - sqlzoo.net-240507-1.jpg" src="lib/media/learn-sql-step-by-step-sqlzoo.net-240507-1.jpg"></span></a></p></div><div><p>game</p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>mdate</td>
+<td>stadium</td>
+<td>team1</td>
+<td>team2</td>
+</tr>
+<tr>
+<td>1001</td>
+<td>8 June 2012</td>
+<td>National Stadium, Warsaw</td>
+<td>POL</td>
+<td>GRE</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>8 June 2012</td>
+<td>Stadion Miejski (Wroclaw)</td>
+<td>RUS</td>
+<td>CZE</td>
+</tr>
+<tr>
+<td>1003</td>
+<td>12 June 2012</td>
+<td>Stadion Miejski (Wroclaw)</td>
+<td>GRE</td>
+<td>CZE</td>
+</tr>
+<tr>
+<td>1004</td>
+<td>12 June 2012</td>
+<td>National Stadium, Warsaw</td>
+<td>POL</td>
+<td>RUS</td>
+</tr>
+</tbody>
+</table></div><div><p>goal</p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>matchid</td>
+<td>teamid</td>
+<td>player</td>
+<td>gtime</td>
+<td></td>
+</tr>
+<tr>
+<td>1001</td>
+<td>POL</td>
+<td>Robert Lewandowski</td>
+<td>17</td>
+<td></td>
+</tr>
+<tr>
+<td>1001</td>
+<td>GRE</td>
+<td>Dimitris Salpingidis</td>
+<td>51</td>
+<td></td>
+</tr>
+<tr>
+<td>1002</td>
+<td>RUS</td>
+<td>Alan Dzagoev</td>
+<td>15</td>
+<td></td>
+</tr>
+<tr>
+<td>1002</td>
+<td>RUS</td>
+<td>Roman Pavlyuchenko</td>
+<td>82</td>
+<td></td>
+</tr>
+</tbody>
+</table></div><div><p>eteam</p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>teamname</td>
+<td>coach</td>
+</tr>
+<tr>
+<td>POL</td>
+<td>Poland</td>
+<td>Franciszek Smuda</td>
+</tr>
+<tr>
+<td>RUS</td>
+<td>Russia</td>
+<td>Dick Advocaat</td>
+</tr>
+<tr>
+<td>CZE</td>
+<td>Czech Republic</td>
+<td>Michal Bilek</td>
+</tr>
+<tr>
+<td>GRE</td>
+<td>Greece</td>
+<td>Fernando Santos</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h2 data-heading="More difficult questions" class="heading" id="More_difficult_questions"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>More difficult questions</h2><div class="heading-children"><div class="heading-wrapper"><h3 data-heading="8. The example query shows all goals scored in the Germany-Greece quarterfinal." class="heading" id="8._The_example_query_shows_all_goals_scored_in_the_Germany-Greece_quarterfinal."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>8. The example query shows all goals scored in the Germany-Greece quarterfinal.</h3><div class="heading-children"><div><p>Instead show the&nbsp;<strong>name</strong>&nbsp;of all players who scored a goal against Germany.</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span> player <span class="token keyword">FROM</span> game <span class="token keyword">join</span> goal <span class="token keyword">on</span> matchid <span class="token operator">=</span> id
+	<span class="token keyword">WHERE</span> <span class="token punctuation">(</span>team1 <span class="token operator">=</span> <span class="token string">'GER'</span> <span class="token operator">OR</span> team2 <span class="token operator">=</span> <span class="token string">'GER'</span><span class="token punctuation">)</span>
+	<span class="token operator">AND</span> teamid <span class="token operator">not</span> <span class="token operator">in</span> <span class="token punctuation">(</span><span class="token string">'GER'</span><span class="token punctuation">)</span>
+
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h3 data-heading="Correct answer" class="heading" id="Correct_answer"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Correct answer</h3><div class="heading-children"><div><p>player</p></div><div><hr></div><div><p>Robin van Persie</p></div><div><hr></div><div><p>Michael Krohn-Dehli</p></div><div><hr></div><div><p>Georgios Samaras</p></div><div><hr></div><div><p>Dimitris Salpingidis</p></div><div><hr></div><div><p>Mario Balotelli</p></div><div><hr></div></div></div><div class="heading-wrapper"><h3 data-heading="9. Show&nbsp;**teamname**&nbsp;and the total number of goals scored." class="heading" id="9._Show&nbsp;**teamname**&nbsp;and_the_total_number_of_goals_scored."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>9. Show&nbsp;<strong>teamname</strong>&nbsp;and the total number of goals scored.</h3><div class="heading-children"><div><p>COUNT and GROUP BY</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> teamname<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>matchid<span class="token punctuation">)</span> <span class="token keyword">as</span> Goals
+	<span class="token keyword">from</span> eteam <span class="token keyword">JOIN</span> goal <span class="token keyword">on</span> id <span class="token operator">=</span> teamid
+    <span class="token keyword">GROUP</span> <span class="token keyword">by</span> teamname
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h3 data-heading="Correct answer" class="heading" id="Correct_answer"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Correct answer</h3><div class="heading-children"><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>teamname</td>
+<td>Goals</td>
+</tr>
+<tr>
+<td>Croatia</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Czech Republic</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Denmark</td>
+<td>4</td>
+</tr>
+<tr>
+<td>England</td>
+<td>5</td>
+</tr>
+<tr>
+<td>France</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Germany</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Greece</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Italy</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Netherlands</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Poland</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Portugal</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Republic of Ireland</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Russia</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Spain</td>
+<td>12</td>
+</tr>
+<tr>
+<td>Sweden</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Ukraine</td>
+<td>2</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="10. Show the stadium and the number of goals scored in each stadium." class="heading" id="10._Show_the_stadium_and_the_number_of_goals_scored_in_each_stadium."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>10. Show the stadium and the number of goals scored in each stadium.</h3><div class="heading-children"><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> stadium<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>matchid<span class="token punctuation">)</span>
+	<span class="token keyword">FROM</span> game <span class="token keyword">JOIN</span> goal <span class="token keyword">on</span> id <span class="token operator">=</span> matchid
+    <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> stadium
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h3 data-heading="Correct answer" class="heading" id="Correct_answer"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Correct answer</h3><div class="heading-children"><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stadium</td>
+<td>COUNT(matchid)</td>
+</tr>
+<tr>
+<td>Arena Lviv</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Donbass Arena</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Metalist Stadium</td>
+<td>7</td>
+</tr>
+<tr>
+<td>National Stadium, Warsaw</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Olimpiyskiy National Sports Complex</td>
+<td>14</td>
+</tr>
+<tr>
+<td>PGE Arena Gdansk</td>
+<td>13</td>
+</tr>
+<tr>
+<td>Stadion Miejski (Poznan)</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Stadion Miejski (Wroclaw)</td>
+<td>9</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="11. For every match involving 'POL', show the matchid, date and the number of goals scored." class="heading" id="11._For_every_match_involving_'POL',_show_the_matchid,_date_and_the_number_of_goals_scored."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>11. For every match involving 'POL', show the matchid, date and the number of goals scored.</h3><div class="heading-children"><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> matchid<span class="token punctuation">,</span> mdate<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>matchid<span class="token punctuation">)</span>
+	<span class="token keyword">FROM</span> game <span class="token keyword">JOIN</span> goal <span class="token keyword">on</span> id <span class="token operator">=</span> matchid
+    <span class="token keyword">WHERE</span> team1 <span class="token operator">=</span> <span class="token string">'POL'</span> <span class="token operator">or</span> team2 <span class="token operator">=</span> <span class="token string">'POL'</span>
+    <span class="token keyword">GROUP</span> <span class="token keyword">by</span> id
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h3 data-heading="Correct answer" class="heading" id="Correct_answer"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Correct answer</h3><div class="heading-children"><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>matchid</td>
+<td>mdate</td>
+<td>COUNT(matchid)</td>
+</tr>
+<tr>
+<td>1001</td>
+<td>8 June 2012</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1004</td>
+<td>12 June 2012</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1005</td>
+<td>16 June 2012</td>
+<td>1</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="12. For every match where 'GER' scored, show matchid, match date and the number of goals scored by 'GER'" class="heading" id="12._For_every_match_where_'GER'_scored,_show_matchid,_match_date_and_the_number_of_goals_scored_by_'GER'"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>12. For every match where 'GER' scored, show matchid, match date and the number of goals scored by 'GER'</h3><div class="heading-children"><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded">
+<span class="token keyword">SELECT</span> matchid<span class="token punctuation">,</span> mdate<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>teamid<span class="token punctuation">)</span>
+	<span class="token keyword">FROM</span> game <span class="token keyword">JOIN</span> goal <span class="token keyword">ON</span> id <span class="token operator">=</span> matchid
+    <span class="token keyword">WHERE</span> teamid <span class="token operator">=</span> <span class="token string">'GER'</span>
+    <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> matchid
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h3 data-heading="Correct answer" class="heading" id="Correct_answer"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Correct answer</h3><div class="heading-children"><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>matchid</td>
+<td>mdate</td>
+<td>COUNT(teamid)</td>
+</tr>
+<tr>
+<td>1008</td>
+<td>9 June 2012</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1010</td>
+<td>13 June 2012</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1012</td>
+<td>17 June 2012</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1026</td>
+<td>22 June 2012</td>
+<td>4</td>
+</tr>
+<tr>
+<td>1030</td>
+<td>28 June 2012</td>
+<td>1</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="13. List every match with the goals scored by each team as shown. This will use &quot;[CASE WHEN](https://sqlzoo.net/wiki/CASE)&quot; which has not been explained in any previous exercises." class="heading" id="13._List_every_match_with_the_goals_scored_by_each_team_as_shown._This_will_use_&quot;[CASE_WHEN](https://sqlzoo.net/wiki/CASE)&quot;_which_has_not_been_explained_in_any_previous_exercises."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>13. List every match with the goals scored by each team as shown. This will use "<a data-tooltip-position="top" aria-label="https://sqlzoo.net/wiki/CASE" rel="noopener" class="external-link" href="https://sqlzoo.net/wiki/CASE" target="_blank">CASE WHEN</a>" which has not been explained in any previous exercises.</h3><div class="heading-children"><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th>mdate</th>
+<th>team1</th>
+<th>score1</th>
+<th>team2</th>
+<th>score2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 July 2012</td>
+<td>ESP</td>
+<td>4</td>
+<td>ITA</td>
+<td>0</td>
+</tr>
+<tr>
+<td>10 June 2012</td>
+<td>ESP</td>
+<td>1</td>
+<td>ITA</td>
+<td>1</td>
+</tr>
+<tr>
+<td>10 June 2012</td>
+<td>IRL</td>
+<td>1</td>
+<td>CRO</td>
+<td>3</td>
+</tr>
+<tr>
+<td>...</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Notice in the query given every goal is listed. If it was a team1 goal then a 1 appears in score1, otherwise there is a 0. You could SUM this column to get a count of the goals scored by team1.&nbsp;<strong>Sort your result by mdate, matchid, team1 and team2.</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> 	mdate<span class="token punctuation">,</span>
+		team1<span class="token punctuation">,</span>
+        <span class="token function">SUM</span><span class="token punctuation">(</span>
+        	<span class="token keyword">CASE</span> <span class="token keyword">WHEN</span> team1 <span class="token operator">=</span> teamid <span class="token keyword">THEN</span> <span class="token number">1</span>
+          	<span class="token keyword">ELSE</span> <span class="token number">0</span>
+          <span class="token keyword">END</span>
+        <span class="token punctuation">)</span> <span class="token keyword">AS</span> score1<span class="token punctuation">,</span>
+        team2<span class="token punctuation">,</span>
+        <span class="token function">SUM</span><span class="token punctuation">(</span>
+        	<span class="token keyword">CASE</span> <span class="token keyword">WHEN</span> team2 <span class="token operator">=</span> teamid <span class="token keyword">THEN</span> <span class="token number">1</span>
+          	<span class="token keyword">ELSE</span> <span class="token number">0</span>
+          <span class="token keyword">END</span>
+        <span class="token punctuation">)</span> <span class="token keyword">AS</span> score2
+
+	<span class="token keyword">FROM</span> game <span class="token keyword">as</span> GA <span class="token keyword">JOIN</span> goal <span class="token keyword">as</span> GL <span class="token keyword">on</span> <span class="token punctuation">(</span>id <span class="token operator">=</span> matchid<span class="token punctuation">)</span>
+    <span class="token keyword">GROUP</span> <span class="token keyword">by</span> mdate<span class="token punctuation">,</span> matchid<span class="token punctuation">,</span> team1<span class="token punctuation">,</span> team2
+
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h3 data-heading="Result:" class="heading" id="Result:"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Result:</h3><div class="heading-children"><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th>mdate</th>
+<th>team1</th>
+<th>score1</th>
+<th>team2</th>
+<th>score2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 July 2012</td>
+<td>ESP</td>
+<td>4</td>
+<td>ITA</td>
+<td>0</td>
+</tr>
+<tr>
+<td>10 June 2012</td>
+<td>ESP</td>
+<td>1</td>
+<td>ITA</td>
+<td>1</td>
+</tr>
+<tr>
+<td>10 June 2012</td>
+<td>IRL</td>
+<td>1</td>
+<td>CRO</td>
+<td>3</td>
+</tr>
+<tr>
+<td>11 June 2012</td>
+<td>FRA</td>
+<td>1</td>
+<td>ENG</td>
+<td>1</td>
+</tr>
+<tr>
+<td>11 June 2012</td>
+<td>UKR</td>
+<td>2</td>
+<td>SWE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>12 June 2012</td>
+<td>GRE</td>
+<td>1</td>
+<td>CZE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>12 June 2012</td>
+<td>POL</td>
+<td>1</td>
+<td>RUS</td>
+<td>1</td>
+</tr>
+<tr>
+<td>13 June 2012</td>
+<td>DEN</td>
+<td>2</td>
+<td>POR</td>
+<td>3</td>
+</tr>
+<tr>
+<td>13 June 2012</td>
+<td>NED</td>
+<td>1</td>
+<td>GER</td>
+<td>2</td>
+</tr>
+<tr>
+<td>14 June 2012</td>
+<td>ITA</td>
+<td>1</td>
+<td>CRO</td>
+<td>1</td>
+</tr>
+<tr>
+<td>14 June 2012</td>
+<td>ESP</td>
+<td>4</td>
+<td>IRL</td>
+<td>0</td>
+</tr>
+<tr>
+<td>15 June 2012</td>
+<td>UKR</td>
+<td>0</td>
+<td>FRA</td>
+<td>2</td>
+</tr>
+<tr>
+<td>15 June 2012</td>
+<td>SWE</td>
+<td>2</td>
+<td>ENG</td>
+<td>3</td>
+</tr>
+<tr>
+<td>16 June 2012</td>
+<td>CZE</td>
+<td>1</td>
+<td>POL</td>
+<td>0</td>
+</tr>
+<tr>
+<td>16 June 2012</td>
+<td>GRE</td>
+<td>1</td>
+<td>RUS</td>
+<td>0</td>
+</tr>
+<tr>
+<td>17 June 2012</td>
+<td>POR</td>
+<td>2</td>
+<td>NED</td>
+<td>1</td>
+</tr>
+<tr>
+<td>17 June 2012</td>
+<td>DEN</td>
+<td>1</td>
+<td>GER</td>
+<td>2</td>
+</tr>
+<tr>
+<td>18 June 2012</td>
+<td>CRO</td>
+<td>0</td>
+<td>ESP</td>
+<td>1</td>
+</tr>
+<tr>
+<td>18 June 2012</td>
+<td>ITA</td>
+<td>2</td>
+<td>IRL</td>
+<td>0</td>
+</tr>
+<tr>
+<td>19 June 2012</td>
+<td>ENG</td>
+<td>1</td>
+<td>UKR</td>
+<td>0</td>
+</tr>
+<tr>
+<td>19 June 2012</td>
+<td>SWE</td>
+<td>2</td>
+<td>FRA</td>
+<td>0</td>
+</tr>
+<tr>
+<td>21 June 2012</td>
+<td>CZE</td>
+<td>0</td>
+<td>POR</td>
+<td>1</td>
+</tr>
+<tr>
+<td>22 June 2012</td>
+<td>GER</td>
+<td>4</td>
+<td>GRE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>23 June 2012</td>
+<td>ESP</td>
+<td>2</td>
+<td>FRA</td>
+<td>0</td>
+</tr>
+<tr>
+<td>28 June 2012</td>
+<td>GER</td>
+<td>1</td>
+<td>ITA</td>
+<td>2</td>
+</tr>
+<tr>
+<td>8 June 2012</td>
+<td>POL</td>
+<td>1</td>
+<td>GRE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>8 June 2012</td>
+<td>RUS</td>
+<td>4</td>
+<td>CZE</td>
+<td>1</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div></div></div></div><div class="markdown-embed-content node-insert-event" style="display: none;"></div><div class="markdown-embed-link" aria-label="Open link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div></span>| 9 June 2012  | NED   | 0      | DEN   | 1      |<br>
+| 9 June 2012  | GER   | 1      | POR   | 0      |</span></div></div></div><div class="heading-wrapper"><h1 data-heading="7. More JOIN operations" class="heading" id="7._More_JOIN_operations">7. More JOIN operations</h1><div class="heading-children"><div><span style="display: block; margin-block-start: var(--p-spacing); margin-block-end: var(--p-spacing);"><span alt="7. More JOIN operations" src="7. More JOIN operations" class="internal-embed markdown-embed inline-embed is-loaded"><div class="embed-title markdown-embed-title">7. More JOIN operations</div><div class="markdown-embed-content node-insert-event"><div class="markdown-preview-view markdown-rendered node-insert-event show-indentation-guide allow-fold-headings allow-fold-lists"><div class="markdown-preview-sizer markdown-preview-section" style="padding-bottom: 0px; min-height: 4069px;"><div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div><div class="mod-header"><div class="inline-title" contenteditable="true" spellcheck="true" autocapitalize="on" tabindex="-1" enterkeyhint="done">7. More JOIN operations</div></div><div><pre class="frontmatter language-yaml" tabindex="0" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">Parent</span><span class="token punctuation">:</span> <span class="token string">"[[Learn SQL step by step by sqlzoo.net]]"</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> IT/SQL
+  <span class="token punctuation">-</span> IT/Sources/SqlZoo<span class="token punctuation">-</span>net</code><button class="copy-code-button">Copy</button></pre></div><div><p>This tutorial introduces the notion of a join. The database consists of three tables&nbsp;<code>movie</code>&nbsp;,&nbsp;<code>actor</code>&nbsp;and&nbsp;<code>casting</code>&nbsp;.</p></div><div class="heading-wrapper"><h3 data-heading="Movie Database details" class="heading" id="Movie_Database_details"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Movie Database details</h3><div class="heading-children"><div><p>This database features two entities (movies and actors) in a many-to-many relation. Each entity has its own table. A third table,&nbsp;<em>casting</em>&nbsp;, is used to link them. The relationship is many-to-many because each film features many actors and each actor has appeared in many films.</p></div><div><p><a data-tooltip-position="top" aria-label="https://sqlzoo.net/w/images/1/10/Movie-er.png" rel="noopener" class="external-link" href="https://sqlzoo.net/w/images/1/10/Movie-er.png" target="_blank"><span alt="Learn SQL step by step - sqlzoo.net-240507-2.jpg" src="Learn SQL step by step - sqlzoo.net-240507-2.jpg" class="internal-embed media-embed image-embed is-loaded"><img alt="Learn SQL step by step - sqlzoo.net-240507-2.jpg" src="lib/media/learn-sql-step-by-step-sqlzoo.net-240507-2.jpg"></span></a></p></div></div></div><div class="heading-wrapper"><h3 data-heading="movie" class="heading" id="movie"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>movie</h3><div class="heading-children"><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Field name</td>
+<td>Type</td>
+<td>Notes</td>
+</tr>
+<tr>
+<td>id</td>
+<td>INTEGER</td>
+<td>An arbitrary unique identifier</td>
+</tr>
+<tr>
+<td>title</td>
+<td>CHAR(70)</td>
+<td>The name of the film - usually in the language of the first release.</td>
+</tr>
+<tr>
+<td>yr</td>
+<td>DECIMAL(4)</td>
+<td>Year of first release.</td>
+</tr>
+<tr>
+<td>director</td>
+<td>INT</td>
+<td>A reference to the actor table.</td>
+</tr>
+<tr>
+<td>budget</td>
+<td>INTEGER</td>
+<td>How much the movie cost to make (in a variety of currencies unfortunately).</td>
+</tr>
+<tr>
+<td>gross</td>
+<td>INTEGER</td>
+<td>How much the movie made at the box office.</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="Example" class="heading" id="Example"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Example</h3><div class="heading-children"><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>id</strong></td>
+<td><strong>title</strong></td>
+<td><strong>yr</strong></td>
+<td><strong>director</strong></td>
+<td><strong>budget</strong></td>
+<td><strong>gross</strong></td>
+</tr>
+<tr>
+<td>10003</td>
+<td>"Crocodile" Dundee II</td>
+<td>1988</td>
+<td>38</td>
+<td>15800000</td>
+<td>239606210</td>
+</tr>
+<tr>
+<td>10004</td>
+<td>'Til There Was You</td>
+<td>1997</td>
+<td>49</td>
+<td>10000000</td>
+<td></td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="actor" class="heading" id="actor"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>actor</h3><div class="heading-children"><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Field name</td>
+<td>Type</td>
+<td>Notes</td>
+</tr>
+<tr>
+<td>id</td>
+<td>INTEGER</td>
+<td>An arbitrary unique identifier</td>
+</tr>
+<tr>
+<td>name</td>
+<td>CHAR(36)</td>
+<td>The name of the actor (the term actor is used to refer to both male and female thesps.)</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="Example" class="heading" id="Example"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Example</h3><div class="heading-children"><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>id</strong></td>
+<td><strong>name</strong></td>
+</tr>
+<tr>
+<td>20</td>
+<td>Paul Hogan</td>
+</tr>
+<tr>
+<td>50</td>
+<td>Jeanne Tripplehorn</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="casting" class="heading" id="casting"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>casting</h3><div class="heading-children"><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Field name</td>
+<td>Type</td>
+<td>Notes</td>
+</tr>
+<tr>
+<td>movieid</td>
+<td>INTEGER</td>
+<td>A reference to the movie table.</td>
+</tr>
+<tr>
+<td>actorid</td>
+<td>INTEGER</td>
+<td>A reference to the actor table.</td>
+</tr>
+<tr>
+<td>ord</td>
+<td>INTEGER</td>
+<td>The ordinal position of the actor in the cast list. The<br><br>star of the movie will have ord value 1 the co-star will have<br><br>value 2, ...</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="Example" class="heading" id="Example"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Example</h3><div class="heading-children"><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>movieid</strong></td>
+<td><strong>actorid</strong></td>
+<td><strong>ord</strong></td>
+</tr>
+<tr>
+<td>10003</td>
+<td>20</td>
+<td>4</td>
+</tr>
+<tr>
+<td>10004</td>
+<td>50</td>
+<td>1</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h2 data-heading="Busy years for Rock Hudson" class="heading" id="Busy_years_for_Rock_Hudson"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Busy years for Rock Hudson</h2><div class="heading-children"><div><ol>
+<li data-line="0">Which were the busiest years for 'Rock Hudson', show the year and the number of movies he made each year for any year in which he made more than 2 movies.</li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded">
+<span class="token keyword">SELECT</span> yr<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span> <span class="token keyword">as</span> titles
+	<span class="token keyword">from</span> movie <span class="token keyword">JOIN</span> casting <span class="token keyword">on</span> movie<span class="token punctuation">.</span>id <span class="token operator">=</span> movieid
+    <span class="token keyword">JOIN</span> actor <span class="token keyword">on</span> actorid <span class="token operator">=</span> actor<span class="token punctuation">.</span>id
+    <span class="token keyword">WHERE</span> name <span class="token operator">=</span> <span class="token string">'Rock Hudson'</span>
+    <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> yr
+    <span class="token keyword">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">2</span>
+
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h2 data-heading="Lead actor in Julie Andrews movies" class="heading" id="Lead_actor_in_Julie_Andrews_movies"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Lead actor in Julie Andrews movies</h2><div class="heading-children"><div><ol>
+<li data-line="0">List the film title and the leading actor for all of the films 'Julie Andrews' played in.</li>
+</ol></div><div><p>Did you get "Little Miss Marker twice"?</p></div><div><p><a rel="noopener" class="external-link" href="https://youtu.be/BcNIDK5qYx8?si=JPnwjebIDYDah67f" target="_blank">https://youtu.be/BcNIDK5qYx8?si=JPnwjebIDYDah67f</a></p></div><div><p><a data-tooltip-position="top" aria-label="https://i.ytimg.com/vi/BcNIDK5qYx8/hqdefault.jpg" rel="noopener" class="external-link" href="https://i.ytimg.com/vi/BcNIDK5qYx8/hqdefault.jpg" target="_blank"><span alt="Learn SQL step by step - sqlzoo.net-240507-3.jpg" src="Learn SQL step by step - sqlzoo.net-240507-3.jpg" class="internal-embed media-embed image-embed is-loaded"><img alt="Learn SQL step by step - sqlzoo.net-240507-3.jpg" src="lib/media/learn-sql-step-by-step-sqlzoo.net-240507-3.jpg"></span></a></p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded">
+<span class="token keyword">SELECT</span> m<span class="token punctuation">.</span>title<span class="token punctuation">,</span> a<span class="token punctuation">.</span>name
+	<span class="token keyword">FROM</span> movie <span class="token keyword">as</span> m <span class="token keyword">JOIN</span> casting <span class="token keyword">as</span> c <span class="token keyword">on</span> <span class="token punctuation">(</span>c<span class="token punctuation">.</span>movieid <span class="token operator">=</span> m<span class="token punctuation">.</span>id
+                                          <span class="token operator">and</span> ord <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token keyword">JOIN</span> actor <span class="token keyword">as</span> a <span class="token keyword">on</span> a<span class="token punctuation">.</span>id <span class="token operator">=</span> c<span class="token punctuation">.</span>actorid
+    <span class="token keyword">WHERE</span> m<span class="token punctuation">.</span>id <span class="token operator">in</span> <span class="token punctuation">(</span>
+      	<span class="token keyword">SELECT</span> movieid <span class="token keyword">FROM</span> casting
+        <span class="token keyword">WHERE</span> actorid <span class="token operator">IN</span> <span class="token punctuation">(</span>
+        <span class="token keyword">SELECT</span> id <span class="token keyword">FROM</span> actor
+        <span class="token keyword">WHERE</span> name<span class="token operator">=</span><span class="token string">'Julie Andrews'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+
+
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h2 data-heading="Actors with 15 leading roles" class="heading" id="Actors_with_15_leading_roles"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Actors with 15 leading roles</h2><div class="heading-children"><div><ol>
+<li data-line="0">Obtain a list, in alphabetical order, of actors who've had at least 15&nbsp;<strong>starring</strong>&nbsp;roles.</li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded">
+<span class="token keyword">SELECT</span> actor<span class="token punctuation">.</span>name
+	<span class="token keyword">FROM</span> actor <span class="token keyword">JOIN</span> casting <span class="token keyword">on</span> actor<span class="token punctuation">.</span>id <span class="token operator">=</span> casting<span class="token punctuation">.</span>actorid
+	<span class="token keyword">where</span> casting<span class="token punctuation">.</span>ord <span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token keyword">GROUP</span> <span class="token keyword">by</span> actor<span class="token punctuation">.</span>name
+    <span class="token keyword">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>ord<span class="token punctuation">)</span> <span class="token operator">&gt;=</span> <span class="token number">15</span>
+
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h2 data-heading="released in the year 1978" class="heading" id="released_in_the_year_1978"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>released in the year 1978</h2><div class="heading-children"><div><ol>
+<li data-line="0">List the films released in the year 1978 ordered by the number of actors in the cast, then by title.</li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded">
+
+<span class="token keyword">SELECT</span> movie<span class="token punctuation">.</span>title<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>casting<span class="token punctuation">.</span>movieid<span class="token punctuation">)</span>
+	<span class="token keyword">FROM</span> movie <span class="token keyword">JOIN</span> casting <span class="token keyword">on</span> movie<span class="token punctuation">.</span>id <span class="token operator">=</span> casting<span class="token punctuation">.</span>movieid
+    <span class="token keyword">WHERE</span> movie<span class="token punctuation">.</span>yr <span class="token operator">=</span> <span class="token number">1978</span>
+    <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> movie<span class="token punctuation">.</span>title
+    <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>casting<span class="token punctuation">.</span>movieid<span class="token punctuation">)</span> <span class="token keyword">DESC</span><span class="token punctuation">,</span> movie<span class="token punctuation">.</span>title
+
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h2 data-heading="with 'Art Garfunkel'" class="heading" id="with_'Art_Garfunkel'"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>with 'Art Garfunkel'</h2><div class="heading-children"><div><ol>
+<li data-line="0">List all the people who have worked with 'Art Garfunkel'.</li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded">
+<span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span> actor<span class="token punctuation">.</span>name
+	<span class="token keyword">FROM</span> actor <span class="token keyword">JOIN</span> casting <span class="token keyword">on</span> casting<span class="token punctuation">.</span>actorid <span class="token operator">=</span> actor<span class="token punctuation">.</span>id
+    <span class="token keyword">JOIN</span> movie <span class="token keyword">on</span> movie<span class="token punctuation">.</span>id <span class="token operator">=</span> casting<span class="token punctuation">.</span>movieid
+    <span class="token keyword">WHERE</span> movie<span class="token punctuation">.</span>id <span class="token operator">in</span> <span class="token punctuation">(</span>
+    	<span class="token keyword">SELECT</span> movie<span class="token punctuation">.</span>id <span class="token keyword">FROM</span> movie <span class="token keyword">JOIN</span> casting <span class="token keyword">on</span> movie<span class="token punctuation">.</span>id <span class="token operator">=</span> casting<span class="token punctuation">.</span>movieid
+      		<span class="token keyword">WHERE</span> casting<span class="token punctuation">.</span>actorid <span class="token operator">in</span> <span class="token punctuation">(</span>
+            	<span class="token keyword">SELECT</span> id <span class="token keyword">FROM</span> actor <span class="token keyword">WHERE</span> name <span class="token operator">=</span> <span class="token string">'Art Garfunkel'</span>
+            <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+    <span class="token operator">AND</span> actor<span class="token punctuation">.</span>name <span class="token operator">!=</span> <span class="token string">'Art Garfunkel'</span>
+
+</code><button class="copy-code-button">Copy</button></pre></div></div></div></div></div></div><div class="markdown-embed-content node-insert-event" style="display: none;"></div><div class="markdown-embed-link" aria-label="Open link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div></span></span></div></div></div><div class="heading-wrapper"><h1 data-heading="8. Using Null" class="heading" id="8._Using_Null">8. Using Null</h1><div class="heading-children"><div><span style="display: block; margin-block-start: var(--p-spacing); margin-block-end: var(--p-spacing);"><span alt="8. Using Null" src="8. Using Null" class="internal-embed markdown-embed inline-embed is-loaded"><div class="embed-title markdown-embed-title">8. Using Null</div><div class="markdown-embed-content node-insert-event"><div class="markdown-preview-view markdown-rendered node-insert-event show-indentation-guide allow-fold-headings allow-fold-lists"><div class="markdown-preview-sizer markdown-preview-section" style="padding-bottom: 0px; min-height: 4989px;"><div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div><div class="mod-header"><div class="inline-title" contenteditable="true" spellcheck="true" autocapitalize="on" tabindex="-1" enterkeyhint="done">8. Using Null</div></div><div><pre class="frontmatter language-yaml" tabindex="0" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">Parent</span><span class="token punctuation">:</span> <span class="token string">"[[Learn SQL step by step by sqlzoo.net]]"</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> IT/SQL
+  <span class="token punctuation">-</span> IT/Sources/SqlZoo<span class="token punctuation">-</span>net</code><button class="copy-code-button">Copy</button></pre></div><div class="heading-wrapper"><h2 data-heading="Teachers and Departments" class="heading" id="Teachers_and_Departments"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Teachers and Departments</h2><div class="heading-children"><div><p>The school includes many departments. Most teachers work exclusively for a single department. Some teachers have no department.</p></div></div></div><div class="heading-wrapper"><h2 data-heading="Database details" class="heading" id="Database_details"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Database details</h2><div class="heading-children"><div><p>teacher</p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>dept</td>
+<td>name</td>
+<td>phone</td>
+<td>mobile</td>
+</tr>
+<tr>
+<td>101</td>
+<td>1</td>
+<td>Shrivell</td>
+<td>2753</td>
+<td>07986 555 1234</td>
+</tr>
+<tr>
+<td>102</td>
+<td>1</td>
+<td>Throd</td>
+<td>2754</td>
+<td>07122 555 1920</td>
+</tr>
+<tr>
+<td>103</td>
+<td>1</td>
+<td>Splint</td>
+<td>2293</td>
+<td></td>
+</tr>
+<tr>
+<td>104</td>
+<td></td>
+<td>Spiregrain</td>
+<td>3287</td>
+<td></td>
+</tr>
+<tr>
+<td>105</td>
+<td>2</td>
+<td>Cutflower</td>
+<td>3212</td>
+<td>07996 555 6574</td>
+</tr>
+<tr>
+<td>106</td>
+<td></td>
+<td>Deadyawn</td>
+<td>3345</td>
+<td></td>
+</tr>
+<tr>
+<td>...</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div><div><p>dept</p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>name</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Computing</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Design</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Engineering</td>
+</tr>
+<tr>
+<td>...</td>
+<td></td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h2 data-heading="I. NULL, INNER JOIN, LEFT JOIN, RIGHT JOIN" class="heading" id="I._NULL,_INNER_JOIN,_LEFT_JOIN,_RIGHT_JOIN"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>I. NULL, INNER JOIN, LEFT JOIN, RIGHT JOIN</h2><div class="heading-children"><div><ol>
+<li data-line="0">List the teachers who have NULL for their department.</li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded">
+<span class="token keyword">SELECT</span> name <span class="token keyword">FROM</span> teacher <span class="token keyword">where</span> dept <span class="token operator">is</span> <span class="token boolean">null</span>
+
+</code><button class="copy-code-button">Copy</button></pre></div><div><p>Correct answer</p></div><div><p>name</p></div><div><hr></div><div><p>Spiregrain</p></div><div><hr></div><div><p>Deadyawn</p></div><div><hr></div><div><ol>
+<li data-line="0">Note the INNER JOIN misses the teachers with no department and the departments with no teacher.</li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded">
+<span class="token keyword">SELECT</span> teacher<span class="token punctuation">.</span>name<span class="token punctuation">,</span> dept<span class="token punctuation">.</span>name
+ <span class="token keyword">FROM</span> teacher <span class="token keyword">INNER</span> <span class="token keyword">JOIN</span> dept
+           <span class="token keyword">ON</span> <span class="token punctuation">(</span>teacher<span class="token punctuation">.</span>dept<span class="token operator">=</span>dept<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+
+</code><button class="copy-code-button">Copy</button></pre></div><div><p>Correct answer</p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name</td>
+</tr>
+<tr>
+<td>Shrivell</td>
+<td>Computing</td>
+</tr>
+<tr>
+<td>Throd</td>
+<td>Computing</td>
+</tr>
+<tr>
+<td>Splint</td>
+<td>Computing</td>
+</tr>
+<tr>
+<td>Cutflower</td>
+<td>Design</td>
+</tr>
+</tbody>
+</table></div><div><ol>
+<li data-line="0">Use a different JOIN so that all teachers are listed.</li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> teacher<span class="token punctuation">.</span>name<span class="token punctuation">,</span> dept<span class="token punctuation">.</span>name
+ <span class="token keyword">FROM</span> teacher <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> dept <span class="token keyword">on</span> <span class="token punctuation">(</span>teacher<span class="token punctuation">.</span>dept <span class="token operator">=</span> dept<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+
+</code><button class="copy-code-button">Copy</button></pre></div><div><p>Correct answer</p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name</td>
+</tr>
+<tr>
+<td>Shrivell</td>
+<td>Computing</td>
+</tr>
+<tr>
+<td>Throd</td>
+<td>Computing</td>
+</tr>
+<tr>
+<td>Splint</td>
+<td>Computing</td>
+</tr>
+<tr>
+<td>Spiregrain</td>
+<td></td>
+</tr>
+<tr>
+<td>Cutflower</td>
+<td>Design</td>
+</tr>
+<tr>
+<td>Deadyawn</td>
+<td></td>
+</tr>
+</tbody>
+</table></div><div><ol>
+<li data-line="0">Use a different JOIN so that all departments are listed.</li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> teacher<span class="token punctuation">.</span>name<span class="token punctuation">,</span> dept<span class="token punctuation">.</span>name
+ <span class="token keyword">FROM</span> teacher <span class="token keyword">right</span> <span class="token keyword">JOIN</span> dept <span class="token keyword">on</span> <span class="token punctuation">(</span>teacher<span class="token punctuation">.</span>dept <span class="token operator">=</span> dept<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+</code><button class="copy-code-button">Copy</button></pre></div><div><p>Correct answer</p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name</td>
+</tr>
+<tr>
+<td>Shrivell</td>
+<td>Computing</td>
+</tr>
+<tr>
+<td>Throd</td>
+<td>Computing</td>
+</tr>
+<tr>
+<td>Splint</td>
+<td>Computing</td>
+</tr>
+<tr>
+<td>Cutflower</td>
+<td>Design</td>
+</tr>
+<tr>
+<td></td>
+<td>Engineering</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h2 data-heading="II. Using the&nbsp;[COALESCE](https://sqlzoo.net/wiki/COALESCE)&nbsp;function" class="heading" id="II._Using_the&nbsp;[COALESCE](https://sqlzoo.net/wiki/COALESCE)&nbsp;function"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>II. Using the&nbsp;<a data-tooltip-position="top" aria-label="https://sqlzoo.net/wiki/COALESCE" rel="noopener" class="external-link" href="https://sqlzoo.net/wiki/COALESCE" target="_blank">COALESCE</a>&nbsp;function</h2><div class="heading-children"><div><ol>
+<li data-line="0">Use COALESCE to print the mobile number. Use the number '07986 444 2266' if there is no number given.&nbsp;<strong>Show teacher name and mobile number or '07986 444 2266'</strong></li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> teacher<span class="token punctuation">.</span>name<span class="token punctuation">,</span> <span class="token keyword">COALESCE</span><span class="token punctuation">(</span>teacher<span class="token punctuation">.</span>mobile<span class="token punctuation">,</span> <span class="token string">'07986 444 2266'</span><span class="token punctuation">)</span>
+	<span class="token keyword">FROM</span> teacher
+</code><button class="copy-code-button">Copy</button></pre></div><div><p><strong>Correct answer</strong></p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>COALESCE(teac..</td>
+</tr>
+<tr>
+<td>Shrivell</td>
+<td>07986 555 1234</td>
+</tr>
+<tr>
+<td>Throd</td>
+<td>07122 555 1920</td>
+</tr>
+<tr>
+<td>Splint</td>
+<td>07986 444 2266</td>
+</tr>
+<tr>
+<td>Spiregrain</td>
+<td>07986 444 2266</td>
+</tr>
+<tr>
+<td>Cutflower</td>
+<td>07996 555 6574</td>
+</tr>
+<tr>
+<td>Deadyawn</td>
+<td>07986 444 2266</td>
+</tr>
+</tbody>
+</table></div><div><ol>
+<li data-line="0">Use the COALESCE function and a LEFT JOIN to print the teacher&nbsp;<strong>name</strong>&nbsp;and department name. Use the string 'None' where there is no department.</li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> teacher<span class="token punctuation">.</span>name<span class="token punctuation">,</span> <span class="token keyword">COALESCE</span><span class="token punctuation">(</span>dept<span class="token punctuation">.</span>name<span class="token punctuation">,</span> <span class="token string">'None'</span><span class="token punctuation">)</span>
+	<span class="token keyword">FROM</span> teacher <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> dept <span class="token keyword">on</span> teacher<span class="token punctuation">.</span>dept <span class="token operator">=</span> dept<span class="token punctuation">.</span>id
+
+</code><button class="copy-code-button">Copy</button></pre></div><div><p><strong>Correct answer</strong></p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>COALESCE(dept..</td>
+</tr>
+<tr>
+<td>Shrivell</td>
+<td>Computing</td>
+</tr>
+<tr>
+<td>Throd</td>
+<td>Computing</td>
+</tr>
+<tr>
+<td>Splint</td>
+<td>Computing</td>
+</tr>
+<tr>
+<td>Spiregrain</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Cutflower</td>
+<td>Design</td>
+</tr>
+<tr>
+<td>Deadyawn</td>
+<td>None</td>
+</tr>
+</tbody>
+</table></div><div><ol>
+<li data-line="0">Use COUNT to show the number of teachers and the number of mobile phones.</li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">'Number of teachers'</span><span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>mobile<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">'Number of mobiles'</span>
+	<span class="token keyword">FROM</span> teacher
+</code><button class="copy-code-button">Copy</button></pre></div><div><p><strong>Correct answer</strong></p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number of tea..</td>
+<td>Number of mob..</td>
+</tr>
+<tr>
+<td>6</td>
+<td>3</td>
+</tr>
+</tbody>
+</table></div><div><ol>
+<li data-line="0">Use COUNT and GROUP BY&nbsp;<a data-tooltip-position="top" aria-label="http://dept.name/" rel="noopener" class="external-link" href="http://dept.name/" target="_blank"><strong>dept.name</strong></a>&nbsp;to show each department and the number of staff. Use a RIGHT JOIN to ensure that the Engineering department is listed.</li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> dept<span class="token punctuation">.</span>name<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>teacher<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+	<span class="token keyword">FROM</span> teacher <span class="token keyword">right</span> <span class="token keyword">JOIN</span> dept <span class="token keyword">on</span> dept<span class="token punctuation">.</span>id <span class="token operator">=</span> teacher<span class="token punctuation">.</span>dept
+    <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> dept<span class="token punctuation">.</span>name
+</code><button class="copy-code-button">Copy</button></pre></div><div><p><strong>Correct answer</strong></p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>COUNT(teacher..</td>
+</tr>
+<tr>
+<td>Computing</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Design</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Engineering</td>
+<td>0</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h2 data-heading="III. Using&nbsp;[CASE](https://sqlzoo.net/wiki/CASE)" class="heading" id="III._Using&nbsp;[CASE](https://sqlzoo.net/wiki/CASE)"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>III. Using&nbsp;<a data-tooltip-position="top" aria-label="https://sqlzoo.net/wiki/CASE" rel="noopener" class="external-link" href="https://sqlzoo.net/wiki/CASE" target="_blank">CASE</a></h2><div class="heading-children"><div><ol>
+<li data-line="0">Use CASE to show the&nbsp;<strong>name</strong>&nbsp;of each teacher followed by 'Sci' if the teacher is in&nbsp;<strong>dept</strong>&nbsp;1 or 2 and 'Art' otherwise.</li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>
+	<span class="token keyword">case</span> <span class="token keyword">when</span> dept <span class="token operator">&lt;</span> <span class="token number">3</span>
+    	<span class="token keyword">then</span> <span class="token string">'Sci'</span>
+        <span class="token keyword">else</span> <span class="token string">'Art'</span>
+    <span class="token keyword">end</span>
+	<span class="token keyword">FROM</span> teacher
+</code><button class="copy-code-button">Copy</button></pre></div><div><p><strong>Correct answer</strong></p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>case when dep..</td>
+</tr>
+<tr>
+<td>Shrivell</td>
+<td>Sci</td>
+</tr>
+<tr>
+<td>Throd</td>
+<td>Sci</td>
+</tr>
+<tr>
+<td>Splint</td>
+<td>Sci</td>
+</tr>
+<tr>
+<td>Spiregrain</td>
+<td>Art</td>
+</tr>
+<tr>
+<td>Cutflower</td>
+<td>Sci</td>
+</tr>
+<tr>
+<td>Deadyawn</td>
+<td>Art</td>
+</tr>
+</tbody>
+</table></div><div><ol>
+<li data-line="0">Use CASE to show the name of each teacher followed by 'Sci' if the teacher is in dept 1 or 2, show 'Art' if the teacher's dept is 3 and 'None' otherwise.</li>
+</ol></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> name<span class="token punctuation">,</span>
+	<span class="token keyword">case</span> <span class="token keyword">when</span> dept <span class="token operator">&lt;</span> <span class="token number">3</span>
+    	<span class="token keyword">then</span> <span class="token string">'Sci'</span>
+        <span class="token keyword">when</span> dept <span class="token operator">=</span> <span class="token number">3</span>
+        <span class="token keyword">then</span> <span class="token string">'Art'</span>
+        <span class="token keyword">else</span> <span class="token string">'None'</span>
+    <span class="token keyword">end</span>
+	<span class="token keyword">FROM</span> teacher
+</code><button class="copy-code-button">Copy</button></pre></div><div><p><strong>Correct answer</strong></p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>case when dep..</td>
+</tr>
+<tr>
+<td>Shrivell</td>
+<td>Sci</td>
+</tr>
+<tr>
+<td>Throd</td>
+<td>Sci</td>
+</tr>
+<tr>
+<td>Splint</td>
+<td>Sci</td>
+</tr>
+<tr>
+<td>Spiregrain</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Cutflower</td>
+<td>Sci</td>
+</tr>
+<tr>
+<td>Deadyawn</td>
+<td>None</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div></div><div class="markdown-embed-content node-insert-event" style="display: none;"></div><div class="markdown-embed-link" aria-label="Open link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div></span></span></div></div></div><div class="heading-wrapper"><h1 data-heading="8.1. NSS Tutorial" class="heading" id="8.1._NSS_Tutorial">8.1. NSS Tutorial</h1><div class="heading-children"><div><span style="display: block; margin-block-start: var(--p-spacing); margin-block-end: var(--p-spacing);"><span alt="8.1. NSS Tutorial" src="8.1. NSS Tutorial" class="internal-embed markdown-embed inline-embed is-loaded"><div class="embed-title markdown-embed-title">8.1. NSS Tutorial</div><div class="markdown-embed-content node-insert-event"><div class="markdown-preview-view markdown-rendered node-insert-event show-indentation-guide allow-fold-headings allow-fold-lists"><div class="markdown-preview-sizer markdown-preview-section" style="padding-bottom: 0px; min-height: 2241px;"><div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div><div class="mod-header"><div class="inline-title" contenteditable="true" spellcheck="true" autocapitalize="on" tabindex="-1" enterkeyhint="done">8.1. NSS Tutorial</div></div><div><pre class="frontmatter language-yaml" tabindex="0" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">Parent</span><span class="token punctuation">:</span> <span class="token string">"[[Learn SQL step by step by sqlzoo.net]]"</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> IT/SQL
+  <span class="token punctuation">-</span> IT/Sources/SqlZoo<span class="token punctuation">-</span>net</code><button class="copy-code-button">Copy</button></pre></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ukprn</td>
+<td>varchar(8)</td>
+</tr>
+<tr>
+<td>institution</td>
+<td>varchar(100)</td>
+</tr>
+<tr>
+<td>subject</td>
+<td>varchar(60)</td>
+</tr>
+<tr>
+<td>level</td>
+<td>varchar(50)</td>
+</tr>
+<tr>
+<td>question</td>
+<td>varchar(10)</td>
+</tr>
+<tr>
+<td>A_STRONGLY_DISAGREE</td>
+<td>int(11)</td>
+</tr>
+<tr>
+<td>A_DISAGREE</td>
+<td>int(11)</td>
+</tr>
+<tr>
+<td>A_NEUTRAL</td>
+<td>int(11)</td>
+</tr>
+<tr>
+<td>A_AGREE</td>
+<td>int(11)</td>
+</tr>
+<tr>
+<td>A_STRONGLY_AGREE</td>
+<td>int(11)</td>
+</tr>
+<tr>
+<td>A_NA</td>
+<td>int(11)</td>
+</tr>
+<tr>
+<td>CI_MIN</td>
+<td>int(11)</td>
+</tr>
+<tr>
+<td>score</td>
+<td>int(11)</td>
+</tr>
+<tr>
+<td>CI_MAX</td>
+<td>int(11)</td>
+</tr>
+<tr>
+<td>response</td>
+<td>int(11)</td>
+</tr>
+<tr>
+<td>sample</td>
+<td>int(11)</td>
+</tr>
+<tr>
+<td>aggregate</td>
+<td>char(1)</td>
+</tr>
+</tbody>
+</table></div><div><p>National Student Survey 2012</p></div><div><p>The National Student Survey&nbsp;<a rel="noopener" class="external-link" href="http://www.thestudentsurvey.com/" target="_blank">http://www.thestudentsurvey.com/</a>&nbsp;is presented to thousands of graduating students in UK Higher Education. The survey asks 22 questions, students can respond with STRONGLY DISAGREE, DISAGREE, NEUTRAL, AGREE or STRONGLY AGREE. The values in these columns represent PERCENTAGES of the total students who responded with that answer.</p></div><div><p>The table&nbsp;<code>nss</code>&nbsp;has one row per institution, subject and question.</p></div><div class="heading-wrapper"><h2 data-heading="6. Strongly Agree, Percentage" class="heading" id="6._Strongly_Agree,_Percentage"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>6. Strongly Agree, Percentage</h2><div class="heading-children"><div><p>Show the percentage of students who A_STRONGLY_AGREE to question 22 for the subject '(8) Computer Science' show the same figure for the subject '(H) Creative Arts and Design'.</p></div><div><p>Use the&nbsp;<strong>ROUND</strong>&nbsp;function to show the percentage without decimal places.</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> subject<span class="token punctuation">,</span> <span class="token function">ROUND</span><span class="token punctuation">(</span><span class="token function">SUM</span><span class="token punctuation">(</span>A_STRONGLY_AGREE<span class="token operator">*</span>response<span class="token operator">/</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token function">SUM</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">)</span>
+	<span class="token keyword">FROM</span> nss
+    <span class="token keyword">WHERE</span> question <span class="token operator">=</span> <span class="token string">'Q22'</span>
+    	<span class="token operator">AND</span> subject <span class="token operator">in</span> <span class="token punctuation">(</span><span class="token string">'(H) Creative Arts and Design'</span><span class="token punctuation">,</span> <span class="token string">'(8) Computer Science'</span><span class="token punctuation">)</span>
+        <span class="token keyword">GROUP</span> <span class="token keyword">by</span> subject
+</code><button class="copy-code-button">Copy</button></pre></div><div><p><strong>correct answer</strong></p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>subject</td>
+<td>ROUND(SUM(A_S..</td>
+</tr>
+<tr>
+<td>(8) Computer Science</td>
+<td>34</td>
+</tr>
+<tr>
+<td>(H) Creative Arts and Design</td>
+<td>36</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h2 data-heading="7. Scores for Institutions in Manchester" class="heading" id="7._Scores_for_Institutions_in_Manchester"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>7. Scores for Institutions in Manchester</h2><div class="heading-children"><div><p>Show the average scores for question 'Q22' for each institution that include 'Manchester' in the name.</p></div><div><p>The column&nbsp;<strong>score</strong>&nbsp;is a percentage - you must use the method outlined above to multiply the percentage by the&nbsp;<strong>response</strong>&nbsp;and divide by the total response. Give your answer rounded to the nearest whole number.</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> institution<span class="token punctuation">,</span> <span class="token function">ROUND</span><span class="token punctuation">(</span><span class="token function">SUM</span><span class="token punctuation">(</span>score<span class="token operator">*</span>response<span class="token operator">/</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token function">SUM</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">)</span>
+	<span class="token keyword">FROM</span> nss
+    <span class="token keyword">WHERE</span> question <span class="token operator">=</span> <span class="token string">'Q22'</span>
+    	<span class="token operator">AND</span> institution <span class="token operator">LIKE</span> <span class="token string">'%Manchester%'</span>
+    <span class="token keyword">GROUP</span> <span class="token keyword">by</span> institution
+
+</code><button class="copy-code-button">Copy</button></pre></div><div><p><strong>correct answer</strong></p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>institution</td>
+<td>ROUND(SUM(sco..</td>
+</tr>
+<tr>
+<td>Manchester Metropolitan University</td>
+<td>81</td>
+</tr>
+<tr>
+<td>The Manchester College</td>
+<td>72</td>
+</tr>
+<tr>
+<td>University of Manchester</td>
+<td>83</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h2 data-heading="8. Number of Computing Students in Manchester" class="heading" id="8._Number_of_Computing_Students_in_Manchester"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>8. Number of Computing Students in Manchester</h2><div class="heading-children"><div><p>Show the institution, the total sample size and the number of computing students for institutions in Manchester for 'Q01'.</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> institution<span class="token punctuation">,</span><span class="token function">SUM</span><span class="token punctuation">(</span>sample<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>
+  <span class="token keyword">SELECT</span> <span class="token function">SUM</span><span class="token punctuation">(</span>sample<span class="token punctuation">)</span> <span class="token keyword">FROM</span> nss <span class="token keyword">as</span> intern
+  <span class="token keyword">WHERE</span> subject <span class="token operator">=</span> <span class="token string">'(8) Computer Science'</span>
+  <span class="token operator">AND</span> extern<span class="token punctuation">.</span>institution <span class="token operator">=</span> intern<span class="token punctuation">.</span>institution
+  <span class="token operator">and</span> extern<span class="token punctuation">.</span>question <span class="token operator">=</span> intern<span class="token punctuation">.</span>question
+	<span class="token punctuation">)</span>
+  <span class="token keyword">FROM</span> nss <span class="token keyword">as</span> extern
+ <span class="token keyword">WHERE</span> question<span class="token operator">=</span><span class="token string">'Q01'</span>
+   <span class="token operator">AND</span> <span class="token punctuation">(</span>institution <span class="token operator">LIKE</span> <span class="token string">'%Manchester%'</span><span class="token punctuation">)</span>
+   <span class="token keyword">GROUP</span> <span class="token keyword">by</span> institution
+
+
+</code><button class="copy-code-button">Copy</button></pre></div><div><p><strong>correct answer</strong></p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>institution</td>
+<td>SUM(sample)</td>
+<td>( SELECT S..</td>
+</tr>
+<tr>
+<td>Manchester Metropolitan University</td>
+<td>6994</td>
+<td>310</td>
+</tr>
+<tr>
+<td>The Manchester College</td>
+<td>537</td>
+<td>46</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div></div><div class="markdown-embed-content node-insert-event" style="display: none;"></div><div class="markdown-embed-link" aria-label="Open link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div></span>|University of Manchester|8065|180|</span></div></div></div><div class="heading-wrapper"><h1 data-heading="9. Self join" class="heading" id="9._Self_join">9. Self join</h1><div class="heading-children"><div><span style="display: block; margin-block-start: var(--p-spacing); margin-block-end: var(--p-spacing);"><span alt="9. Self join" src="9. Self join" class="internal-embed markdown-embed inline-embed is-loaded"><div class="embed-title markdown-embed-title">9. Self join</div><div class="markdown-embed-content node-insert-event"><div class="markdown-preview-view markdown-rendered node-insert-event show-indentation-guide allow-fold-headings allow-fold-lists"><div class="markdown-preview-sizer markdown-preview-section" style="padding-bottom: 0px; min-height: 3608.13px;"><div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div><div class="mod-header"><div class="inline-title" contenteditable="true" spellcheck="true" autocapitalize="on" tabindex="-1" enterkeyhint="done">9. Self join</div></div><div><pre class="frontmatter language-yaml" tabindex="0" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">Parent</span><span class="token punctuation">:</span> <span class="token string">"[[Learn SQL step by step by sqlzoo.net]]"</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> IT/SQL
+  <span class="token punctuation">-</span> IT/Sources/SqlZoo<span class="token punctuation">-</span>net</code><button class="copy-code-button">Copy</button></pre></div><div class="heading-wrapper"><h2 data-heading="Details of the database" class="heading" id="Details_of_the_database"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Details of the database</h2><div class="heading-children"><div class="heading-wrapper"><h3 data-heading="Edinburgh Buses" class="heading" id="Edinburgh_Buses"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Edinburgh Buses</h3><div class="heading-children"><div><p>This database consists of two tables: stops and routes</p></div></div></div><div class="heading-wrapper"><h3 data-heading="stops" class="heading" id="stops"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>stops</h3><div class="heading-children"><div><p>This is a list of areas served by buses. The detail does not really include each actual bus stop - just areas within Edinburgh and whole towns near Edinburgh.</p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Field</td>
+<td>Type</td>
+<td>Notes</td>
+</tr>
+<tr>
+<td>id</td>
+<td>INTEGER</td>
+<td>Arbitrary value</td>
+</tr>
+<tr>
+<td>name</td>
+<td>CHAR(30)</td>
+<td>The name of an area served by at least one bus</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="route" class="heading" id="route"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>route</h3><div class="heading-children"><div><p>A route is the path through town taken by a bus.</p></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Field</td>
+<td>Type</td>
+<td>Notes</td>
+</tr>
+<tr>
+<td>num</td>
+<td>CHAR(5)</td>
+<td>The number of the bus - as it appears on the front of the vehicle. Oddly these numbers often include letters</td>
+</tr>
+<tr>
+<td>company</td>
+<td>CHAR(3)</td>
+<td>Several bus companies operate in Edinburgh. The main one is Lothian Region Transport - LRT</td>
+</tr>
+<tr>
+<td>pos</td>
+<td>INTEGER</td>
+<td>This indicates the order of the stop within the route. Some routes may revisit a stop. Most buses go in both directions.</td>
+</tr>
+<tr>
+<td>stop</td>
+<td>INTEGER</td>
+<td>This references the stops table</td>
+</tr>
+</tbody>
+</table></div><div><p>As different companies use numbers arbitrarily the num and the company are both required to identify a route.</p></div></div></div></div></div><div class="heading-wrapper"><h2 data-heading="Routes and stops" class="heading" id="Routes_and_stops"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Routes and stops</h2><div class="heading-children"><div class="heading-wrapper"><h3 data-heading="4." class="heading" id="4."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>4.</h3><div class="heading-children"><div><p>The query shown gives the number of routes that visit either London Road (149) or Craiglockhart (53). Run the query and notice the two services that link these&nbsp;<strong>stops</strong>&nbsp;have a count of 2. Add a HAVING clause to restrict the output to these two routes.</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> company<span class="token punctuation">,</span> num<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span>
+<span class="token keyword">FROM</span> route <span class="token keyword">WHERE</span> stop<span class="token operator">=</span><span class="token number">149</span> <span class="token operator">OR</span> stop<span class="token operator">=</span><span class="token number">53</span>
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> company<span class="token punctuation">,</span> num
+<span class="token keyword">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&gt;=</span><span class="token number">2</span>
+
+</code><button class="copy-code-button">Copy</button></pre></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>company</td>
+<td>num</td>
+<td>COUNT()</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>45</td>
+<td>2</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="5." class="heading" id="5."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>5.</h3><div class="heading-children"><div><p>Execute the self join shown and observe that b.stop gives all the places you can get to from Craiglockhart, without changing routes. Change the query so that it shows the services from Craiglockhart to London Road.</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> a<span class="token punctuation">.</span>company<span class="token punctuation">,</span> a<span class="token punctuation">.</span>num<span class="token punctuation">,</span> a<span class="token punctuation">.</span>stop<span class="token punctuation">,</span> b<span class="token punctuation">.</span>stop
+<span class="token keyword">FROM</span> route a <span class="token keyword">JOIN</span> route b <span class="token keyword">ON</span>
+  <span class="token punctuation">(</span>a<span class="token punctuation">.</span>company<span class="token operator">=</span>b<span class="token punctuation">.</span>company <span class="token operator">AND</span> a<span class="token punctuation">.</span>num<span class="token operator">=</span>b<span class="token punctuation">.</span>num<span class="token punctuation">)</span>
+<span class="token keyword">WHERE</span> a<span class="token punctuation">.</span>stop<span class="token operator">=</span><span class="token number">53</span> <span class="token operator">and</span> b<span class="token punctuation">.</span>stop <span class="token operator">=</span> <span class="token number">149</span>
+</code><button class="copy-code-button">Copy</button></pre></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>company</td>
+<td>num</td>
+<td>stop</td>
+<td>stop</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>4</td>
+<td>53</td>
+<td>149</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>45</td>
+<td>53</td>
+<td>149</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="6." class="heading" id="6."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>6.</h3><div class="heading-children"><div><p>The query shown is similar to the previous one, however by joining two copies of the&nbsp;<strong>stops</strong>&nbsp;table we can refer to&nbsp;<strong>stops</strong>&nbsp;by&nbsp;<strong>name</strong>&nbsp;rather than by number. Change the query so that the services between 'Craiglockhart' and 'London Road' are shown. If you are tired of these places try 'Fairmilehead' against 'Tollcross'</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> a<span class="token punctuation">.</span>company<span class="token punctuation">,</span> a<span class="token punctuation">.</span>num<span class="token punctuation">,</span> stopa<span class="token punctuation">.</span>name<span class="token punctuation">,</span> stopb<span class="token punctuation">.</span>name
+<span class="token keyword">FROM</span> route a <span class="token keyword">JOIN</span> route b <span class="token keyword">ON</span>
+  <span class="token punctuation">(</span>a<span class="token punctuation">.</span>company<span class="token operator">=</span>b<span class="token punctuation">.</span>company <span class="token operator">AND</span> a<span class="token punctuation">.</span>num<span class="token operator">=</span>b<span class="token punctuation">.</span>num<span class="token punctuation">)</span>
+  <span class="token keyword">JOIN</span> stops stopa <span class="token keyword">ON</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>stop<span class="token operator">=</span>stopa<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+  <span class="token keyword">JOIN</span> stops stopb <span class="token keyword">ON</span> <span class="token punctuation">(</span>b<span class="token punctuation">.</span>stop<span class="token operator">=</span>stopb<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+<span class="token keyword">WHERE</span> stopa<span class="token punctuation">.</span>name<span class="token operator">=</span><span class="token string">'Craiglockhart'</span> <span class="token operator">and</span> stopb<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'London Road'</span>
+</code><button class="copy-code-button">Copy</button></pre></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>company</td>
+<td>num</td>
+<td>name</td>
+<td>name</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>4</td>
+<td>Craiglockhart</td>
+<td>London Road</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>45</td>
+<td>Craiglockhart</td>
+<td>London Road</td>
+</tr>
+</tbody>
+</table></div></div></div></div></div><div class="heading-wrapper"><h2 data-heading="Using a [self join](https://sqlzoo.net/wiki/Using_a_self_join)" class="heading" id="Using_a_[self_join](https://sqlzoo.net/wiki/Using_a_self_join)"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Using a <a data-tooltip-position="top" aria-label="https://sqlzoo.net/wiki/Using_a_self_join" rel="noopener" class="external-link" href="https://sqlzoo.net/wiki/Using_a_self_join" target="_blank">self join</a></h2><div class="heading-children"><div class="heading-wrapper"><h3 data-heading="7." class="heading" id="7."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>7.</h3><div class="heading-children"><div><p>Give a list of all the services which connect stops 115 and 137 ('Haymarket' and 'Leith')</p></div><div><pre class="language-sql" tabindex="0"><code class="language-sql is-loaded"><span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span> a<span class="token punctuation">.</span>company<span class="token punctuation">,</span> a<span class="token punctuation">.</span>num
+	<span class="token keyword">FROM</span> route a <span class="token keyword">JOIN</span> route b <span class="token keyword">ON</span>
+    	<span class="token punctuation">(</span>a<span class="token punctuation">.</span>company <span class="token operator">=</span> b<span class="token punctuation">.</span>company <span class="token operator">AND</span> a<span class="token punctuation">.</span>num <span class="token operator">=</span> b<span class="token punctuation">.</span>num<span class="token punctuation">)</span>
+        <span class="token keyword">JOIN</span> stops sa <span class="token keyword">on</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>stop <span class="token operator">=</span> sa<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+        <span class="token keyword">JOIN</span> stops sb <span class="token keyword">on</span> <span class="token punctuation">(</span>b<span class="token punctuation">.</span>stop <span class="token operator">=</span> sb<span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+        <span class="token keyword">WHERE</span> sa<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Haymarket'</span> <span class="token operator">and</span> sb<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Leith'</span>
+</code><button class="copy-code-button">Copy</button></pre></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>company</td>
+<td>num</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>12</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>2</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>22</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>25</td>
+</tr>
+<tr>
+<td>LRT</td>
+<td>2A</td>
+</tr>
+<tr>
+<td>SMT</td>
+<td>C5</td>
+</tr>
+</tbody>
+</table></div></div></div><div class="heading-wrapper"><h3 data-heading="8." class="heading" id="8."><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>8.</h3><div class="heading-children"><div></div></div></div></div></div></div></div></div><div class="markdown-embed-content node-insert-event" style="display: none;"></div><div class="markdown-embed-link" aria-label="Open link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div></span></span></div><div class="mod-footer"></div></div></div></div></div></div><div class="sidebar-right sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content"><div class="graph-view-wrapper"><div class="sidebar-section-header">Interactive Graph</div><div class="graph-view-placeholder">
+		<div class="graph-view-container">
+			<div class="graph-icon graph-expand" role="button" aria-label="Expand" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+			<canvas id="graph-canvas" class="hide" width="512px" height="512px"></canvas>
+		</div>
+		</div></div><div class="tree-container mod-root nav-folder tree-item outline-tree" data-depth="0"><div class="tree-header"><span class="sidebar-section-header">Table Of Contents</span><button class="clickable-icon collapse-tree-button" aria-label="Collapse All"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button></div><div class="tree-scroll-area tree-item-children nav-folder-children"><div class="tree-item mod-tree-folder nav-folder mod-collapsible is-collapsed" style="display: none;"></div><div class="tree-item" data-depth="1"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#6. The JOIN operation"><div class="tree-item-contents heading-link" heading-name="
+The JOIN operation
+"><span class="tree-item-title">The JOIN operation</span></div></a><div class="tree-item-children nav-folder-children"><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#JOIN_and_UEFA_EURO_2012"><div class="tree-item-contents heading-link" heading-name="JOIN and UEFA EURO 2012"><span class="tree-item-title">JOIN and UEFA EURO 2012</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#UEFA_Database_details"><div class="tree-item-contents heading-link" heading-name="UEFA Database details"><span class="tree-item-title">UEFA Database details</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#More_difficult_questions"><div class="tree-item-contents heading-link" heading-name="More difficult questions"><span class="tree-item-title">More difficult questions</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#8._The_example_query_shows_all_goals_scored_in_the_Germany-Greece_quarterfinal."><div class="tree-item-contents heading-link" heading-name="8. The example query shows all goals scored in the Germany-Greece quarterfinal."><span class="tree-item-title">8. 
+The example query shows all goals scored in the Germany-Greece quarterfinal.
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Correct_answer"><div class="tree-item-contents heading-link" heading-name="Correct answer"><span class="tree-item-title">Correct answer</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#9._Show&nbsp;**teamname**&nbsp;and_the_total_number_of_goals_scored."><div class="tree-item-contents heading-link" heading-name="9. Show&nbsp;**teamname**&nbsp;and the total number of goals scored."><span class="tree-item-title">9. 
+Show&nbsp;teamname&nbsp;and the total number of goals scored.
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Correct_answer"><div class="tree-item-contents heading-link" heading-name="Correct answer"><span class="tree-item-title">Correct answer</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#10._Show_the_stadium_and_the_number_of_goals_scored_in_each_stadium."><div class="tree-item-contents heading-link" heading-name="10. Show the stadium and the number of goals scored in each stadium."><span class="tree-item-title">10. 
+Show the stadium and the number of goals scored in each stadium.
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Correct_answer"><div class="tree-item-contents heading-link" heading-name="Correct answer"><span class="tree-item-title">Correct answer</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#11._For_every_match_involving_'POL',_show_the_matchid,_date_and_the_number_of_goals_scored."><div class="tree-item-contents heading-link" heading-name="11. For every match involving 'POL', show the matchid, date and the number of goals scored."><span class="tree-item-title">11. 
+For every match involving 'POL', show the matchid, date and the number of goals scored.
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Correct_answer"><div class="tree-item-contents heading-link" heading-name="Correct answer"><span class="tree-item-title">Correct answer</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#12._For_every_match_where_'GER'_scored,_show_matchid,_match_date_and_the_number_of_goals_scored_by_'GER'"><div class="tree-item-contents heading-link" heading-name="12. For every match where 'GER' scored, show matchid, match date and the number of goals scored by 'GER'"><span class="tree-item-title">12. 
+For every match where 'GER' scored, show matchid, match date and the number of goals scored by 'GER'
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Correct_answer"><div class="tree-item-contents heading-link" heading-name="Correct answer"><span class="tree-item-title">Correct answer</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#13._List_every_match_with_the_goals_scored_by_each_team_as_shown._This_will_use_&quot;[CASE_WHEN](https://sqlzoo.net/wiki/CASE)&quot;_which_has_not_been_explained_in_any_previous_exercises."><div class="tree-item-contents heading-link" heading-name="13. List every match with the goals scored by each team as shown. This will use &quot;[CASE WHEN](https://sqlzoo.net/wiki/CASE)&quot; which has not been explained in any previous exercises."><span class="tree-item-title">13. 
+List every match with the goals scored by each team as shown. This will use "CASE WHEN" which has not been explained in any previous exercises.
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Result:"><div class="tree-item-contents heading-link" heading-name="Result:"><span class="tree-item-title">Result:</span></div></a><div class="tree-item-children nav-folder-children"></div></div></div></div><div class="tree-item" data-depth="1"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#7._More_JOIN_operations"><div class="tree-item-contents heading-link" heading-name="7. More JOIN operations"><span class="tree-item-title">7. 
+More JOIN operations
+</span></div></a><div class="tree-item-children nav-folder-children"><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Movie_Database_details"><div class="tree-item-contents heading-link" heading-name="Movie Database details"><span class="tree-item-title">Movie Database details</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#movie"><div class="tree-item-contents heading-link" heading-name="movie"><span class="tree-item-title">movie</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Example"><div class="tree-item-contents heading-link" heading-name="Example"><span class="tree-item-title">Example</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#actor"><div class="tree-item-contents heading-link" heading-name="actor"><span class="tree-item-title">actor</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Example"><div class="tree-item-contents heading-link" heading-name="Example"><span class="tree-item-title">Example</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#casting"><div class="tree-item-contents heading-link" heading-name="casting"><span class="tree-item-title">casting</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Example"><div class="tree-item-contents heading-link" heading-name="Example"><span class="tree-item-title">Example</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Busy_years_for_Rock_Hudson"><div class="tree-item-contents heading-link" heading-name="Busy years for Rock Hudson"><span class="tree-item-title">Busy years for Rock Hudson</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Lead_actor_in_Julie_Andrews_movies"><div class="tree-item-contents heading-link" heading-name="Lead actor in Julie Andrews movies"><span class="tree-item-title">Lead actor in Julie Andrews movies</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Actors_with_15_leading_roles"><div class="tree-item-contents heading-link" heading-name="Actors with 15 leading roles"><span class="tree-item-title">Actors with 15 leading roles</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#released_in_the_year_1978"><div class="tree-item-contents heading-link" heading-name="released in the year 1978"><span class="tree-item-title">released in the year 1978</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#with_'Art_Garfunkel'"><div class="tree-item-contents heading-link" heading-name="with 'Art Garfunkel'"><span class="tree-item-title">with 'Art Garfunkel'</span></div></a><div class="tree-item-children nav-folder-children"></div></div></div></div><div class="tree-item" data-depth="1"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#8._Using_Null"><div class="tree-item-contents heading-link" heading-name="8. Using Null"><span class="tree-item-title">8. 
+Using Null
+</span></div></a><div class="tree-item-children nav-folder-children"><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Teachers_and_Departments"><div class="tree-item-contents heading-link" heading-name="Teachers and Departments"><span class="tree-item-title">Teachers and Departments</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Database_details"><div class="tree-item-contents heading-link" heading-name="Database details"><span class="tree-item-title">Database details</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#I._NULL,_INNER_JOIN,_LEFT_JOIN,_RIGHT_JOIN"><div class="tree-item-contents heading-link" heading-name="I. NULL, INNER JOIN, LEFT JOIN, RIGHT JOIN"><span class="tree-item-title">I. NULL, INNER JOIN, LEFT JOIN, RIGHT JOIN</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#II._Using_the&nbsp;[COALESCE](https://sqlzoo.net/wiki/COALESCE)&nbsp;function"><div class="tree-item-contents heading-link" heading-name="II. Using the&nbsp;[COALESCE](https://sqlzoo.net/wiki/COALESCE)&nbsp;function"><span class="tree-item-title">II. Using the&nbsp;<a data-tooltip-position="top" aria-label="https://sqlzoo.net/wiki/COALESCE" rel="noopener" class="external-link" href="https://sqlzoo.net/wiki/COALESCE" target="_blank">COALESCE</a>&nbsp;function</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#III._Using&nbsp;[CASE](https://sqlzoo.net/wiki/CASE)"><div class="tree-item-contents heading-link" heading-name="III. Using&nbsp;[CASE](https://sqlzoo.net/wiki/CASE)"><span class="tree-item-title">III. Using&nbsp;<a data-tooltip-position="top" aria-label="https://sqlzoo.net/wiki/CASE" rel="noopener" class="external-link" href="https://sqlzoo.net/wiki/CASE" target="_blank">CASE</a></span></div></a><div class="tree-item-children nav-folder-children"></div></div></div></div><div class="tree-item" data-depth="1"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#8.1._NSS_Tutorial"><div class="tree-item-contents heading-link" heading-name="8.1. NSS Tutorial"><span class="tree-item-title">8.1. NSS Tutorial</span></div></a><div class="tree-item-children nav-folder-children"><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#6._Strongly_Agree,_Percentage"><div class="tree-item-contents heading-link" heading-name="6. Strongly Agree, Percentage"><span class="tree-item-title">6. 
+Strongly Agree, Percentage
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#7._Scores_for_Institutions_in_Manchester"><div class="tree-item-contents heading-link" heading-name="7. Scores for Institutions in Manchester"><span class="tree-item-title">7. 
+Scores for Institutions in Manchester
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#8._Number_of_Computing_Students_in_Manchester"><div class="tree-item-contents heading-link" heading-name="8. Number of Computing Students in Manchester"><span class="tree-item-title">8. 
+Number of Computing Students in Manchester
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div></div></div><div class="tree-item" data-depth="1"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#9._Self_join"><div class="tree-item-contents heading-link" heading-name="9. Self join"><span class="tree-item-title">9. 
+Self join
+</span></div></a><div class="tree-item-children nav-folder-children"><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Details_of_the_database"><div class="tree-item-contents heading-link" heading-name="Details of the database"><span class="tree-item-title">Details of the database</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Edinburgh_Buses"><div class="tree-item-contents heading-link" heading-name="Edinburgh Buses"><span class="tree-item-title">Edinburgh Buses</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#stops"><div class="tree-item-contents heading-link" heading-name="stops"><span class="tree-item-title">stops</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#route"><div class="tree-item-contents heading-link" heading-name="route"><span class="tree-item-title">route</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Routes_and_stops"><div class="tree-item-contents heading-link" heading-name="Routes and stops"><span class="tree-item-title">Routes and stops</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#4."><div class="tree-item-contents heading-link" heading-name="4."><span class="tree-item-title">4. 
+
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#5."><div class="tree-item-contents heading-link" heading-name="5."><span class="tree-item-title">5. 
+
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#6."><div class="tree-item-contents heading-link" heading-name="6."><span class="tree-item-title">6. 
+
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="8"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#Using_a_[self_join](https://sqlzoo.net/wiki/Using_a_self_join)"><div class="tree-item-contents heading-link" heading-name="Using a [self join](https://sqlzoo.net/wiki/Using_a_self_join)"><span class="tree-item-title">Using a <a data-tooltip-position="top" aria-label="https://sqlzoo.net/wiki/Using_a_self_join" rel="noopener" class="external-link" href="https://sqlzoo.net/wiki/Using_a_self_join" target="_blank">self join</a></span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#7."><div class="tree-item-contents heading-link" heading-name="7."><span class="tree-item-title">7. 
+
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="9"><a class="tree-link" href="04.-literature-notes/learn-sql-step-by-step-by-sqlzoo.net/learn-sql-step-by-step-by-sqlzoo.net.html#8."><div class="tree-item-contents heading-link" heading-name="8."><span class="tree-item-title">8. 
+
+</span></div></a><div class="tree-item-children nav-folder-children"></div></div></div></div></div></div></div><script defer="">let rs = document.querySelector(".sidebar-right"); rs.classList.add("is-collapsed"); if (window.innerWidth > 768) rs.classList.remove("is-collapsed"); rs.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-right-width"));</script></div></div></body></html>
